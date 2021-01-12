@@ -3,7 +3,8 @@ var mongoose = require("mongoose");
 const options = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
 };
 
 // connect....
@@ -20,3 +21,7 @@ mongoose.connect(
         }
     }
 );
+
+//import models.
+require("./book.js");
+require("./author.js");
