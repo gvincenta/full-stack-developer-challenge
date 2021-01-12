@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 const Author = mongoose.model(
   "Author",
   new mongoose.Schema({
-    first_name: {
+    firstName: {
         type: String, 
         required: true
     },
-    last_name: {
+    lastName: {
         type: String, 
         required: true
     }
