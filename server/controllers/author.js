@@ -1,7 +1,5 @@
 var mongoose = require("mongoose"); 
-var Author = mongoose.model("Author");  
-/** Creates a new goal for the user.
- * @param req.query : all the details of the goal inserted as queries. */
+var Author = mongoose.model("Author");   
 
 module.exports = {
     createAuthor : (req, res) => {      
@@ -35,7 +33,6 @@ module.exports = {
     
     
     getAllAuthors : (req, res) => { 
-        const {id} = req.body;
         
          Author.find({})
             .then(doc => {
