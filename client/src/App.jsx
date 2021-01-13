@@ -1,11 +1,7 @@
-
+import Navbar from './Navbar'
 function App() {
   return (
-    <div>
-      <header> 
-        
-      </header>
-    </div>
+    <Navbar/>
   );
 }
 
