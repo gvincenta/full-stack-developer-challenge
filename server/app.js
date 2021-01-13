@@ -8,7 +8,9 @@ var logger = require('morgan');
 require("./models/db.js");
 
 //routes import
-var indexRouter = require('./routes/index'); 
+var indexRouter = require('./routes/index');
+var bookRouter = require('./routes/book');
+var booksRouter = require('./routes/books');
 var authorRouter = require('./routes/author');
 var authorsRouter = require('./routes/authors');
 
@@ -26,8 +28,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
  
 //routes setup
-app.use('/', indexRouter); 
-app.use('/author', authorRouter); 
+app.use('/', indexRouter);
+app.use('/book', bookRouter);
+app.use('/author', authorRouter);
+app.use('/books', booksRouter);
 app.use('/authors', authorsRouter);
 
 
