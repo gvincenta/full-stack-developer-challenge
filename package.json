@@ -9,6 +9,7 @@
     "start-dev": "concurrently \"yarn run server-dev\" \"yarn run client-dev\""
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
