@@ -1,11 +1,11 @@
+import React from 'react'
 import {Card, Button} from 'react-bootstrap'
-export default function(){
+export default function({name, isbn, _id : id}){
+     
     return (<Card style={{width:'75%'}}> 
         <Card.Body>
-          <Card.Title> <Card.Link onClick={() => {
-              console.log('bookname click')
-          }}> Book Name  </Card.Link> </Card.Title> 
-          <Card.Text>Book Desc</Card.Text> 
+          <Card.Title> <Card.Link  href={'/book/' + id}> {name} </Card.Link> </Card.Title> 
+          
         </Card.Body> 
       </Card>)
 }
