@@ -9,7 +9,8 @@ import { RouteComponentProps } from "react-router-dom";
 
 import Navbar from './Navbar'
 import Books from './Books'
-import BookForm from './Books/Modal'
+import Authors from './Authors'
+
 
 function App() {
   return (
@@ -21,8 +22,15 @@ function App() {
                     <Books/> 
             </Route>
             <Route  path='/book/:id' > 
-            <Books/>  
-     </Route>
+              <Books/>  
+            </Route>
+            <Route exact path='/authors' > 
+             
+                    <Authors/> 
+            </Route>
+            <Route  path='/author/:id' > 
+              <Authors/>  
+            </Route>
             
         </BrowserRouter>
     </>
