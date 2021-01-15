@@ -17,21 +17,7 @@ export default function(props){
   const [authorMode, setAuthorMode] = useState( 'Assign Existing')
   const validate =  () => {
     console.log('CHECKING..' , {book}, )
-    // if (!Boolean(book.name) ||  book.name?.length < 1){ 
-    //   setFormError({...formError,  name: 'Name is required.'})
-    // } 
-    // if (!book.isbn || book.isbn?.length < 1){
-    //   setFormError({...formError,  isbn: 'ISBN is required.'})
-    // }
-    // if ( authorMode ==='Assign Existing' &&    (!book.author || book.author?.length < 1)){
-    //   setFormError({...formError,  author: 'Author is required.'})
-    // }
-    // if (authorMode ==='Add New' &&   (  !book.author?.firstName || book.author?.firstName?.length < 1  ) ){
-    //   setFormError({...formError, author:{...formError.author , firstName:   'First Name is required.'}})
-    // }
-    // if (authorMode ==='Add New' &&   book.author?.lastName?.length < 1){
-    //   setFormError({...formError, author:{...formError.author , lastName:   'First Name is required.'}})
-    // }
+   
     const newState = {   
       name:(!book.name ||  book.name?.length < 1) && 'Name is required.',
       isbn: (!book.isbn || book.isbn?.length < 1) && 'ISBN is required.', 
@@ -57,12 +43,13 @@ export default function(props){
   }
     const handleSubmit = async  (e) => {
       e.preventDefault();
-      // setLoading(true)
+      setLoading(true)
       setSuccess(null)
       setError(null)
       setFormError({}) 
       
       if ( !validate()){ //there is an error.
+        setLoading(false)
         return; 
       }
       console.log('form error', {formError}) 
@@ -114,7 +101,7 @@ export default function(props){
         
     }, [id])
     useEffect(() => {
-      if (authorMode === 'Assign Existing') {
+      if (!id && authorMode === 'Assign Existing') {
        axios.get('/authors')
        .then(res =>{
            console.log('axios get all authors ', res)
@@ -126,7 +113,7 @@ export default function(props){
        })
       }
        
-   }, [authorMode])
+   }, [id, authorMode])
      
    
     return (
