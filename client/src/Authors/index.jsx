@@ -13,6 +13,9 @@ export default function(props){
           fetch='/authors'
           Item={Author}
           Modal={Modal}
+          search={(data, search) => {
+            return data.filter(v =>   v.firstName.toUpperCase().search(search.toUpperCase()) !== -1 ||  v.lastName.toUpperCase().search(search.toUpperCase()) !== -1)
+          }}
           />
     </>
     );
