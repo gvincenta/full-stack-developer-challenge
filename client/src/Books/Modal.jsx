@@ -7,24 +7,71 @@ import Modal from '../Templates/Modal'
 
 export default function(props){
   const {id, add} = props
-  const [book, setBook] = useState([])  
+  const [book, setBook] = useState({})  
   const [authors, setAuthors] = useState([])  
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(null)
   const [error, setError] = useState(null)
+
+  const [formError, setFormError] = useState({})
   const [authorMode, setAuthorMode] = useState( 'Assign Existing')
- 
+  const validate =  () => {
+    console.log('CHECKING..' , {book}, )
+    // if (!Boolean(book.name) ||  book.name?.length < 1){ 
+    //   setFormError({...formError,  name: 'Name is required.'})
+    // } 
+    // if (!book.isbn || book.isbn?.length < 1){
+    //   setFormError({...formError,  isbn: 'ISBN is required.'})
+    // }
+    // if ( authorMode ==='Assign Existing' &&    (!book.author || book.author?.length < 1)){
+    //   setFormError({...formError,  author: 'Author is required.'})
+    // }
+    // if (authorMode ==='Add New' &&   (  !book.author?.firstName || book.author?.firstName?.length < 1  ) ){
+    //   setFormError({...formError, author:{...formError.author , firstName:   'First Name is required.'}})
+    // }
+    // if (authorMode ==='Add New' &&   book.author?.lastName?.length < 1){
+    //   setFormError({...formError, author:{...formError.author , lastName:   'First Name is required.'}})
+    // }
+    const newState = {   
+      name:(!book.name ||  book.name?.length < 1) && 'Name is required.',
+      isbn: (!book.isbn || book.isbn?.length < 1) && 'ISBN is required.', 
+      author:  authorMode ==='Assign Existing' ? (!book.author || book.author?.length < 1) && 'Author is required.'
+      : {
+        firstName: (  !book.author?.firstName || book.author?.firstName?.length < 1  ) && 'First Name is required.',
+        lastName:  (  !book.author?.lastName || book.author?.lastName?.length < 1  )  && 'Last Name is required.'
+      }
+
+    }
+    setFormError( newState)
+
+    if (newState.name  || newState.isbn || newState.author || newState.author?.firstName || newState.author?.lastName ){
+      console.log('NEW STATE ERORR', newState)
+      return false; 
+    }
+    return true; 
+
+     
+    
+
+
+  }
     const handleSubmit = async  (e) => {
       e.preventDefault();
-      setLoading(true)
+      // setLoading(true)
       setSuccess(null)
       setError(null)
+      setFormError({}) 
+      
+      if ( !validate()){ //there is an error.
+        return; 
+      }
+      console.log('form error', {formError}) 
       var createAuthorResponse = null; 
       
       /* for assigning existing authors, book has {author: authorID}
         for adding new author, book has {author: {firstName, lastName}}  */ 
       var author = book.author; 
-
+      
       if (authorMode === 'Add New'){
         
         createAuthorResponse = await axios.post('author', book.author)
@@ -95,43 +142,38 @@ export default function(props){
         handleClose = {() => window.location.assign('/books')}
         content={   <Form>
           <h3> Book </h3>
-<Form.Group as={Row} >
-<Form.Label column sm="3">
-Name
-</Form.Label>
-<Col sm="7">
-
-  <TextField
-    size='small' 
-    style={{ width: '100%' }}
-    variant="outlined"
-    value={book.name}
-    onChange={(e) => {
-         
+          {[{label: 'Name' , field: 'name',  
+  onChange:(e) => {
         setBook({...book, name:e.target.value  })
-    }}
-  />
-</Col>
-</Form.Group>
-
-<Form.Group as={Row}>
-<Form.Label column sm="3">
-ISBN
-</Form.Label>
-<Col sm="7">
-
-<TextField
-    size='small' 
-    style={{ width: '100%' }}
-    variant="outlined"
-    value={book.isbn}
-    onChange={(e) => {
-    
-     setBook({...book, isbn:e.target.value  })
- }}
-  />
-</Col>
-</Form.Group>
+    }
+  },
+  {label: 'ISBN' , field: 'isbn',  
+  onChange:(e) => {
+        setBook({...book, isbn:e.target.value  })
+    }
+  }
+  ].map( ({label, field, onChange} , idx ) =>  <Form.Group as={Row} key={idx} >
+ 
+  <Form.Label column sm="3">
+  {label}
+  </Form.Label>
+  <Col sm="7">
+  
+    <TextField
+      size='small' 
+      style={{ width: '100%' }}
+      variant="outlined"
+      value={book[field]}
+      onChange={ onChange}
+      error={Boolean(formError[field])}
+      helperText={formError[field]}
+  
+    />
+  </Col>
+  </Form.Group> )
+    }
+ 
+ 
 <h3> Author </h3>
 {!id && <DropdownButton id="dropdown-basic-button" title={authorMode} style={{display:'inline'}} size='sm'>
   <Dropdown.Item onClick={() => {setAuthorMode('Assign Existing')}}>Assign Existing</Dropdown.Item>
@@ -154,7 +196,10 @@ First Name
     onChange={(e) => {
     
      setBook({...book, author: {...book.author, firstName: e.target.value } })
- }}
+    }}
+    error={Boolean(formError.author?.firstName)}
+    helperText={formError.author?.firstName}
+  
   />
 </Col>
 </Form.Group>
@@ -170,10 +215,13 @@ Last Name
     style={{ width: '100%' }}
     variant="outlined"
     value={book.author?.lastName}
+    
     onChange={(e) => {
     
      setBook({...book, author: {...book.author, lastName: e.target.value } })
  }}
+ error={Boolean(formError.author?.lastName)}
+ helperText={formError.author?.lastName}
   /> 
 </Col>
 </Form.Group> </>)}
@@ -184,6 +232,9 @@ Author
 <Col sm="7">
  
 <Autocomplete options={authors}
+error={Boolean(formError.author)}
+helperText={formError.author}
+
 onChange={(e) =>{
   console.log('autocomplete on change' , e.target.innerHTML.split(','))
   const names = e.target.innerHTML.split(',')
@@ -191,9 +242,9 @@ onChange={(e) =>{
   const lastName = names[0]
   const author = authors.find(v => v.lastName === lastName && v.firstName === firstName)
   console.log('found author' , author)
-  console.log('SET BOOK HERE' , {...book, author: author._id })
+  console.log('SET BOOK HERE' , {...book, author: author?._id })
 
-  setBook({...book, author: author._id })
+  setBook({...book, author: author?._id })
 
 }}/>
 </Col>

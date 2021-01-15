@@ -1,11 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete'; 
-export default function Asynchronous({options, onChange}) {
+export default function Asynchronous({options, onChange, error, helperText}) {
   const [open, setOpen] = React.useState(false);
- 
-  
- 
 
   return (
     <Autocomplete
@@ -13,6 +10,7 @@ export default function Asynchronous({options, onChange}) {
       id="asynchronous-demo"
       style={{ width: '100%' }}
       open={open}
+      
       onOpen={() => {
         setOpen(true);
       }}
@@ -21,7 +19,7 @@ export default function Asynchronous({options, onChange}) {
       }}
       getOptionSelected={(option, value) =>  {
         // console.log('GET OPT SELECTED', option, value )
-        return  option._id === value._id
+        return  option._id === value?._id
       }}
       getOptionLabel={(option) => option.lastName + ',' +option.firstName}
       onChange={onChange}
@@ -29,6 +27,8 @@ export default function Asynchronous({options, onChange}) {
       renderInput={(params) => (
         <TextField
           size='small'
+          error={error}
+          helperText={helperText}
           {...params} 
           variant="outlined"
            
