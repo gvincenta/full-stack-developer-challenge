@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Modal from '../Templates/Modal'
 import axios from 'axios'
 import { Form, Col, Row} from 'react-bootstrap'
-import {TextField} from '@material-ui/core'
-import Autocomplete from '../Autocomplete'
-import { set } from 'mongoose'
+import {TextField} from '@material-ui/core' 
 export default function(props){
     
     const {id, add} = props
