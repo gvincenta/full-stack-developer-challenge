@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { Modal, Button, Spinner, Alert  } from 'react-bootstrap'
- 
+import './Modal.css'
 export default function({id, success, error,  fetch, handleClose, title, content, handleSubmit, loading}){ 
 
     // console.log('PROPS ARE', props)
     console.log('ID ARE', id)
-    const [show, setShow] = useState(true);
-    const [authorMode, setAuthorMode] = useState('Edit');
-
-     const handleShow = () => setShow(true);
+    const [show, setShow] = useState(true); 
+ 
     
  
 
