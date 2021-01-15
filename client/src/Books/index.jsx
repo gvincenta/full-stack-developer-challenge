@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import {CardColumns, Form, FormControl, InputGroup, Button} from 'react-bootstrap'
-import axios from 'axios'
-import {TextField} from '@material-ui/core'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import axios from 'axios' 
 import { 
     useParams,
     useRouteMatch
   } from "react-router-dom";
   
+import Home from '../Templates/Home'
+
 import Book from './Book'
 import Modal from './Modal'
+import FlipCard from './FlipCard'
 
 export default function(props){
     const [books, setBooks] = useState([]) 
@@ -26,7 +25,7 @@ export default function(props){
         axios.get('/books')
         .then(res =>{
             console.log('axios get all books ', res)
-            setBooks(res.data)
+            setBooks([...res.data, ...res.data, ...res.data , ...res.data, ...res.data])
         })
         .catch(e => {
             console.log('axios error', e)
@@ -37,28 +36,13 @@ export default function(props){
 
 
     return (
-        <>
-            <div style={{textAlign:'center', width:'15%', padding: 10, margin:'auto'}}>
-            <TextField
-          size='small' 
-          style={{ width: '100%' }}
-          variant="outlined"
-          placeholder='Search...'
-    //       value={book.author?.lastName}
-    //       onChange={(e) => {
-          
-    //        setBook({...book, author: {...book.author, lastName: e.target.value } })
-    //    }}
-        />
-
-            </div>
-        <CardColumns> 
-       { books.map(v => <Book key={v._id} {...v}/>)}
-    </CardColumns>
-    <Fab aria-label='Add' style={{ position: 'absolute', bottom: 50, right: 50}} color='primary' onClick={() => setAdd(true)}>
-    <AddIcon />
-          </Fab>
-    {(id || add) && <Modal id={id} add={add}/>}
-    </>
+        <Home
+          fetch='/books'
+          Item={FlipCard}
+          Modal={Modal}
+          search={(data, search) => {
+            return data.filter(v =>   v.name.toUpperCase().search(search.toUpperCase()) !== -1)
+          }}
+          />
     );
 }

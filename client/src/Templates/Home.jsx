@@ -16,8 +16,9 @@ export default function(props){
 
     console.log('PROPS ARE', props) 
     
-    const {Modal, fetch , Item} = props;
+    const {Modal, fetch , Item, search: searchFunction} = props;
     const { id } = useParams();
+    const [search, setSearch] = useState('')
     console.log('ID ARE', id)
 
     useEffect(() => {
@@ -43,17 +44,18 @@ export default function(props){
           style={{ width: '100%' }}
           variant="outlined"
           placeholder='Search...'
-    //       value={book.author?.lastName}
-    //       onChange={(e) => {
+          value={search}
+          onChange={(e) => {
+              console.log('e.target', e.target.value, search)
           
-    //        setBook({...book, author: {...book.author, lastName: e.target.value } })
-    //    }}
+           setSearch(e.target.value)
+       }}
         />
 
             </div>
-        <CardColumns> 
-       { data.map(v => <Item key={v._id} {...v}/>)}
-    </CardColumns>
+            <div style={{display:'grid', gridTemplateColumns:'auto auto auto auto'}}>
+       {search.length === 0 ?  data.map(v => <Item key={v._id} {...v}/>) : searchFunction(data, search).map(v => <Item key={v._id} {...v}/>)  }
+     </div>
     <Fab aria-label='Add' style={{ position: 'absolute', bottom: 50, right: 50}} color='primary' onClick={() => setAdd(true)}>
     <AddIcon />
           </Fab>
