@@ -24,7 +24,7 @@ export default function(props){
       
         axios.get(fetch)
         .then(res =>{
-            console.log('axios get all books ', res)
+            console.log('axios get all data ', res)
             setData(res.data)
         })
         .catch(e => {

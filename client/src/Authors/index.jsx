@@ -12,6 +12,7 @@ export default function(props){
           <Home
           fetch='/authors'
           Item={Author}
+          Modal={Modal}
           />
     </>
     );

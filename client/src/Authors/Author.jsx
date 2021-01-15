@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react'
-
-export default function(props){
+import React from 'react'
+import {Card, Button} from 'react-bootstrap'
+export default function({firstName, lastName, _id : id}){
      
-
-
-    return (
-        <>
-           
-    </>
-    );
+    return (<Card style={{width:'75%'}}> 
+        <Card.Body>
+          <Card.Title> <Card.Link  href={'/author/' + id}> {lastName + ' , ' + firstName} </Card.Link> </Card.Title> 
+          
+        </Card.Body> 
+      </Card>)
 }
