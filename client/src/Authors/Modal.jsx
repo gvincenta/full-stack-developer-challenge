@@ -10,19 +10,45 @@ export default function(props){
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(null)
     const [error, setError] = useState(null)
-
+    const [formError, setFormError] = useState({})
+    const validate =  () => {
+        console.log('CHECKING..' , {author}, )
+       
+        const newState = {    
+            firstName: (  !author.firstName ||author.firstName?.length < 1  ) && 'First Name is required.',
+            lastName:  (  !author.lastName || author.lastName?.length < 1  )  && 'Last Name is required.'
+        }
+        setFormError( newState)
+    
+        if (  newState.firstName || newState.lastName ){
+          console.log('NEW STATE ERORR', newState)
+          return false; 
+        }
+        return true; 
+    
+         
+        
+    
+    
+      }
     const handleSubmit =  (e) => {
         e.preventDefault();
         setLoading(true)
-        setSuccess(null)
-        setError(null)
+      setSuccess(null)
+      setError(null)
+      setFormError({}) 
+      
+      if ( !validate()){ //there is an error.
+        setLoading(false)
+        return; 
+      }
         axios.post('/author', author)
         .then((res) => {
             console.log('SUBMITTED', res)
             setTimeout(() => {
                 setLoading(false);
                 setSuccess(true);
-            }, 2000)
+            }, 1500)
             
         })
         .catch( (e) => {
@@ -30,7 +56,7 @@ export default function(props){
             setTimeout(() => {
                 setLoading(false);
                 setError(true);
-            }, 2000)
+            }, 1500)
 
         })
         
@@ -51,8 +77,7 @@ export default function(props){
          
      }, [id])
 
-    return (
-        <>
+    return ( 
         <Modal
         {...props} 
         loading={loading}
@@ -63,47 +88,38 @@ export default function(props){
         title={id ? 'View Author Details' : 'Add New Author'}
         handleClose = {() => window.location.assign('/authors')}
         content={<Form>
-            
-<Form.Group as={Row} >
-<Form.Label column sm="3">
-  First Name
-</Form.Label>
-<Col sm="7">
-
-<TextField
-      size='small' 
-      style={{ width: '100%' }}
-      variant="outlined"
-      value={author.firstName}
-      onChange={(e) => {
-      
-       setAuthor({...author,  firstName: e.target.value  })
-   }}
-    />
-</Col>
-</Form.Group>
-
-<Form.Group as={Row}>
-<Form.Label column sm="3">
-Last Name
-</Form.Label>
-<Col sm="7">
+            {[{label: 'First Name' , field: 'firstName',  
+  onChange:(e) => {
+        setAuthor({...author, firstName:e.target.value  })
+    }
+  },
+  {label: 'Last Name' , field: 'lastName',  
+  onChange:(e) => {
+    setAuthor({...author, lastName:e.target.value  })
+    }
+  }
+  ].map( ({label, field, onChange} , idx ) =>  <Form.Group as={Row} key={idx} >
+ 
+  <Form.Label column sm="3">
+  {label}
+  </Form.Label>
+  <Col sm="7">
   
-<TextField
+    <TextField
       size='small' 
       style={{ width: '100%' }}
       variant="outlined"
-      value={author.lastName}
-      onChange={(e) => {
-      
-       setAuthor({...author,  lastName: e.target.value  })
-   }}
-    /> 
-</Col>
-</Form.Group>
-</Form>}
-        />
-           
-    </>
+      value={author[field]}
+      onChange={ onChange}
+      error={Boolean(formError[field])}
+      helperText={formError[field]}
+  
+    />
+  </Col>
+  </Form.Group> )
+    } 
+ 
+         </Form> }/>
     );
+    
 }
