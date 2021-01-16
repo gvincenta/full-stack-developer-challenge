@@ -53,10 +53,10 @@ export default function(props){
         />
 
             </div>
-            <div style={{display:'grid', gridTemplateColumns:'20% 20% 20% 20% ',  justifyContent: 'center', alignContent: 'center'}}>
+            <div style={{display:'grid', gridTemplateColumns:'33% 33% 33%', padding:'auto',  justifyContent: 'center', alignContent: 'center', rowGap:'5%'}}>
        {search.length === 0 ?  data.map(v => <Item key={v._id} {...v}/>) : searchFunction(data, search).map(v => <Item key={v._id} {...v}/>)  }
      </div>
-    <Fab aria-label='Add' style={{ position: 'absolute', bottom: 50, right: 50}} color='primary' onClick={() => setAdd(true)}>
+    <Fab aria-label='Add' style={{ position: 'sticky', bottom: '10%', left: '90%'}} color='primary' onClick={() => setAdd(true)}>
     <AddIcon />
           </Fab>
     {(id || add) && <Modal id={id} add={add}/>}
