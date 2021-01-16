@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {
   BrowserRouter,
   Switch,
@@ -6,6 +6,8 @@ import {
   Link
 } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Navbar from './Navbar'
 import Books from './Books'
@@ -13,8 +15,26 @@ import Authors from './Authors'
 
 
 function App() {
+  const theme = useMemo(
+    () =>
+        createMuiTheme({
+            typography: {
+                button: {
+                    textTransform: 'none'
+                }
+            },
+            palette: {
+                type:  'dark' ,
+                primary: {
+                    main:  '#AB7742' 
+                }
+            },
+          }), 
+    []
+);
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
         <Navbar/>
         <BrowserRouter>
             <Route exact path='/books' > 
@@ -33,7 +53,7 @@ function App() {
             </Route>
             
         </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
 }
 
