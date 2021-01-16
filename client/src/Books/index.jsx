@@ -6,7 +6,7 @@ import {
   } from "react-router-dom";
   
 import Home from '../Templates/Home'
-
+import Carousel from './Carousel'
 import Book from './Book'
 import Modal from './Modal'
 import FlipCard from './FlipCard'
@@ -36,6 +36,8 @@ export default function(props){
 
 
     return (
+     <>
+      <Carousel/>
         <Home
           fetch='/books'
           Item={FlipCard}
@@ -44,5 +46,6 @@ export default function(props){
             return data.filter(v =>   v.name.toUpperCase().search(search.toUpperCase()) !== -1)
           }}
           />
+          </>
     );
 }
