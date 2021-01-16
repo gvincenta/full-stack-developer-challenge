@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Modal, Button, Spinner, Alert  } from 'react-bootstrap'
 import './Modal.css'
-export default function({id, success, error,  fetch, handleClose, title, content, handleSubmit, loading}){ 
+export default function({id, success, error, size, fetch, handleClose, title, content, handleSubmit, loading}){ 
 
     // console.log('PROPS ARE', props)
     console.log('ID ARE', id)
@@ -15,7 +15,7 @@ export default function({id, success, error,  fetch, handleClose, title, content
     return (
         <> 
     
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} size={size}>
             <Modal.Header closeButton>
               <Modal.Title> {title} </Modal.Title>
             </Modal.Header>
