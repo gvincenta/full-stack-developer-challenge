@@ -1,7 +1,7 @@
 import React from 'react'
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
 export default function (){
-    return (  <Navbar bg="dark" variant="dark">
+    return (  <Navbar  style={{background:'#212121'}} variant='dark'>
     <Navbar.Brand href="/books">Infoxchange</Navbar.Brand>
     <Nav>
       <Nav.Link href="/books">Books</Nav.Link>
