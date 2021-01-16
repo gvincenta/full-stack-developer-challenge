@@ -4,6 +4,7 @@ import axios from 'axios'
 import {TextField} from '@material-ui/core'
 import Autocomplete from '../Autocomplete'
 import Modal from '../Templates/Modal'
+import Book from './Book'
 
 export default function(props){
   const {id, add} = props
@@ -30,7 +31,7 @@ export default function(props){
     }
     setFormError( newState)
 
-    if (newState.name  || newState.isbn || newState.author || newState.author?.firstName || newState.author?.lastName ){
+    if (newState.name  || newState.isbn ||  (authorMode === 'Assign Existing' && newState.author )|| (authorMode === 'Add New' && ( newState.author?.firstName || newState.author?.lastName) ) ){
       console.log('NEW STATE ERORR', newState)
       return false; 
     }
@@ -120,6 +121,7 @@ export default function(props){
       <>
         <Modal
         {...props} 
+        size={'lg'}
         loading={loading}
         success={success}
         error={error}
@@ -236,9 +238,16 @@ onChange={(e) =>{
 }}/>
 </Col>
 </Form.Group>)}
+<h3> More like this... </h3>
+<Row> 
+  <Col>  <Book/> </Col>
+  <Col>  <Book/> </Col>
+  <Col>  <Book/> </Col>
+</Row>
+ 
 </Form>}
         />
-           
+ 
     </>
        
       );
