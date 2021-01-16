@@ -38,11 +38,11 @@ export default function(props){
 
     return (
         <>
-            <div style={{textAlign:'center', width:'15%', padding: 10, margin:'auto'}}>
+            <div style={{textAlign:'center', width:'30%', padding: 10, margin:'auto'}}>
             <TextField
           size='small' 
-          style={{ width: '100%' }}
-          variant="outlined"
+          fullWidth 
+          variant="outlined" 
           placeholder='Search...'
           value={search}
           onChange={(e) => {
@@ -53,7 +53,7 @@ export default function(props){
         />
 
             </div>
-            <div style={{display:'grid', gridTemplateColumns:'auto auto auto auto'}}>
+            <div style={{display:'grid', gridTemplateColumns:'20% 20% 20% 20% ',  justifyContent: 'center', alignContent: 'center'}}>
        {search.length === 0 ?  data.map(v => <Item key={v._id} {...v}/>) : searchFunction(data, search).map(v => <Item key={v._id} {...v}/>)  }
      </div>
     <Fab aria-label='Add' style={{ position: 'absolute', bottom: 50, right: 50}} color='primary' onClick={() => setAdd(true)}>
