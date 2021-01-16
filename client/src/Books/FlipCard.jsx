@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import FlipCard from '../Templates/FlipCard'
-import {Card, Button} from 'react-bootstrap'
+import {Card, ListGroup} from 'react-bootstrap'
 import axios from 'axios'
+import image from '../images/BookCover1.jpg'
 
 export default function ({name, isbn, _id : id} ){
     const [book, setBook] = useState({})  
@@ -22,9 +23,20 @@ export default function ({name, isbn, _id : id} ){
      }, [id])
   return ( 
   <FlipCard
-  front={ <Card.Title   > {name}  </Card.Title> }
-  back={<> <Card.Title   > {name}  </Card.Title> 
-    <Card.Text   > ISBN : {isbn}  </Card.Text>
-    <Card.Text   > Author : {book.author?.lastName + ' , '+ book.author?.firstName}  </Card.Text> </>  }
+  front={  <Card.Body  >   <Card.Img variant="top" src={image} style={{width: '50%' , height: '50%'}}/> <h6 style={{marginTop:'5%',   overflow: 'hidden',
+  textOverflow:'ellipsis', whiteSpace:'nowrap'}}  > {name}  </h6>  </Card.Body>}
+  back={<Card.Body>  
+  <Card.Img variant="top" src={image} style={{width: '35%' , height: '35%'}}/> 
+    
+    <p style={{    overflow: 'hidden',
+  textOverflow:'ellipsis', whiteSpace:'nowrap'}} >  {name} </p>
+    <p style={{  overflow: 'hidden',
+  textOverflow:'ellipsis', whiteSpace:'nowrap'}} > {isbn} </p>
+    <p style={{   overflow: 'hidden',
+  textOverflow:'ellipsis', whiteSpace:'nowrap'}} > {book.author?.lastName + ' , '+ book.author?.firstName} </p>
+   {/* <Card.Body style={{padding:'2%'}}>   <Card.Img variant="top" src={image} style={{width: '35%' , height: '35%'}}/>  */}
+  
+  {/* <p style={{  display:'inline'}}  > {name}  {name} </p>    */}
+   </Card.Body> }
    /> );
 } 
