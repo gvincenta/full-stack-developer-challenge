@@ -11,10 +11,14 @@ module.exports = {
             name, 
             author
         });
-        book.save();
+        book.save()
+        .then(response => res.status(200).json(response)  //return OK with the new book's details.
+        )
+        .catch(error => res.status(500).json(error)  //return error message.
+        );
     
-        //return OK with the new book's details.
-        res.status(200).json(book);
+       
+        
     },
     getBookByID : async (req, res) => { 
         const {id} = req.query;
@@ -33,6 +37,7 @@ module.exports = {
 
         }) 
         }
+        res.status(500).json(); //NO ID.
         
     },
     getAllBooks : (req, res) => {  

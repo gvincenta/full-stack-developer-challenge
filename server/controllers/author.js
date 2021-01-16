@@ -9,10 +9,11 @@ module.exports = {
         var author = new Author({
             firstName, lastName
         });
-        author.save();
-    
+        author.save().then(response => res.status(200).json(response)  
         //return OK with the new author's details.
-        res.status(200).json(author);
+        )
+        .catch(error => res.status(500).json(error)  //return error message.
+        );
     },
     getAuthorByID : (req, res) => { 
         const {id} = req.query;
@@ -28,6 +29,7 @@ module.exports = {
             });
             return;
         }
+        res.status(500).json(); //no ID specified.
         
     },
     
