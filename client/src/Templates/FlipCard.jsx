@@ -1,11 +1,5 @@
 import React, {useEffect} from 'react'
 import  './FlipCard.css'
-function randomBg(){
-  var x = Math. floor(Math. random() * 175 + 80);
-var y = Math. floor(Math. random() *175 + 80 );
-var z = Math. floor(Math. random() *175 + 80); //+80 to avoid dark colors
-  return "rgb(" + x + "," + y + "," + z + ")";
-}
 
 export default function ({front, back} ){
 
