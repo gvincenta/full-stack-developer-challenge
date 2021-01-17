@@ -1,5 +1,8 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+/**
+ * Navbar component.
+ */
 export default function() {
     return (
         <Navbar style={{ background: "#212121" }} variant="dark">

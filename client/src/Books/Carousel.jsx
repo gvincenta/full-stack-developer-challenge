@@ -5,6 +5,10 @@ import axios from "axios";
 import image from "../images/BookCover1.jpg";
 import Spinner from "../Spinner";
 import Error from "../Error";
+import config from '../config.json'
+/**
+ * Book carousel showing: Best Seller, Most Popular, and New Releases.
+ */
 export default function() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -87,8 +91,7 @@ export default function() {
                                         marginLeft: "30%",
                                         paddingTop: "5%"
                                     }}>
-                                    {" "}
-                                    No data currently available.{" "}
+                                    {config.message.noData}
                                 </h1>
                             </div>
                         </Carousel.Item>

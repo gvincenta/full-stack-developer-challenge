@@ -65,3 +65,13 @@ a{
     background: #363636;
 
 }
+
+.dropdown-menu.show{
+    background: #AB7742;
+}
+.dropdown-item{
+    text-decoration : none !important;
+}
+.dropdown-item:hover{
+    background: grey !important;
+}

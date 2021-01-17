@@ -1,12 +1,12 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 /**
- * Error component.
+ * 404 component.
  */
 export default function(props) {
     return (
         <Alert variant={"danger"} {...props}>
-            Sorry, there was a problem. Please try again later.
+        Error 404 - Not Found <br/> The resource you are looking for has been removed, had its name changed, or is temporarily unavailable.
         </Alert>
     );
 }

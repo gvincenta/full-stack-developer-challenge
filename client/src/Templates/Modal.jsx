@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
 import Spinner from "../Spinner";
 import Error from "../Error";
+/**
+ * Modal layout.
+ */
+import config from '../config.json'
 export default function({
     id,
     success,
@@ -27,8 +31,7 @@ export default function({
                 <Modal.Body>
                     {success && (
                         <Alert variant={"info"}>
-                            Your response has been recorded. You may now close
-                            this window.
+                            {config.message.success}
                         </Alert>
                     )}
                     {error && <Error />}

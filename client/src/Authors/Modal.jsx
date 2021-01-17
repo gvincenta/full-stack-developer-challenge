@@ -3,6 +3,10 @@ import Modal from "../Templates/Modal";
 import axios from "axios";
 import { Form, Col, Row } from "react-bootstrap";
 import { TextField } from "@material-ui/core";
+import config from '../config.json'
+/**
+ *  Author modal logic.
+ */
 export default function(props) {
     const { id, add } = props;
     const [author, setAuthor] = useState([]);
@@ -10,7 +14,7 @@ export default function(props) {
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
     const [formError, setFormError] = useState({});
-    const validate = () => {
+    const validate = () => { //author modal validation (must have firstName and lastName filled).
         console.log("CHECKING..", { author });
 
         const newState = {
@@ -41,6 +45,7 @@ export default function(props) {
             setLoading(false);
             return;
         }
+        //posts to /author.
         axios
             .post("/author", author)
             .then(res => {
@@ -48,21 +53,21 @@ export default function(props) {
                 setTimeout(() => {
                     setLoading(false);
                     setSuccess(true);
-                }, 1500);
+                }, config.loading);
             })
             .catch(e => {
                 console.log("ERROR", e);
                 setTimeout(() => {
                     setLoading(false);
                     setError(true);
-                }, 1500);
+                }, config.loading);
             });
     };
 
     useEffect(() => {
         if (id) {
             axios
-                .get("/author/", { params: { id } })
+                .get("/author/", { params: { id } }) //get from /author/:id
                 .then(res => {
                     console.log("axios get specific book ", res);
                     setAuthor(res.data);
@@ -114,7 +119,7 @@ export default function(props) {
                             <Col sm="7">
                                 <TextField
                                     size="small"
-                                    style={{ width: "100%" }}
+                                    fullWidth
                                     variant="outlined"
                                     value={author[field]}
                                     onChange={onChange}

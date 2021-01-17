@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import "./FlipCard.css";
-
+/**
+ * Flip card layout. 
+ */
 export default function({ front, back }) {
     const height = 250;
     return (

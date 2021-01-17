@@ -4,10 +4,13 @@ import { Card, ListGroup } from "react-bootstrap";
 import axios from "axios";
 import image from "../images/BookCover1.jpg";
 
+/**
+ *  Book card detail with flippable content. 
+ */
 export default function({ name, isbn, _id: id }) {
     const [book, setBook] = useState({});
 
-    useEffect(() => {
+    useEffect(() => { //get from /book/:id
         if (id) {
             axios
                 .get("/book", { params: { id } })
@@ -22,7 +25,7 @@ export default function({ name, isbn, _id: id }) {
     }, [id]);
     return (
         <FlipCard
-            front={
+            front={ //only shows book's name.
                 <Card.Body>
                     {" "}
                     <Card.Img
@@ -36,7 +39,7 @@ export default function({ name, isbn, _id: id }) {
                     </p>{" "}
                 </Card.Body>
             }
-            back={
+            back={  //shows book's name. isbn, and its author's details.
                 <Card.Body>
                     <Card.Img
                         variant="top"

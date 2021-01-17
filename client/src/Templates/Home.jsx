@@ -8,7 +8,9 @@ import { useParams, useRouteMatch } from "react-router-dom";
 import Spinner from "../Spinner";
 import Error from "../Error";
 import NoData from "../NoData";
-
+/**
+ * Homepage layout.
+ */
 export default function(props) {
     const [data, setData] = useState([]);
     const [add, setAdd] = useState(false);
@@ -68,11 +70,11 @@ export default function(props) {
                 {toolbar}
             </div>
 
-            {loading ? (
+            {loading ? ( //loading state 
                 <Spinner />
-            ) : error ? (
+            ) : error ? ( //error state
                 <Error className="homepage-alert" />
-            ) : data.length > 0 ? (
+            ) : data.length > 0 ? ( //there are some data to be displayed.
                 <div
                     style={{
                         display: "grid",
@@ -88,11 +90,11 @@ export default function(props) {
                               <Item key={v._id} {...v} />
                           ))}
                 </div>
-            ) : (
+            ) : ( //no data state 
                 <NoData className="homepage-alert" />
             )}
-
-            <Fab
+            {/* floating action button on bottom right: */}
+            <Fab 
                 aria-label="Add"
                 style={{ position: "sticky", bottom: "10%", left: "90%" }}
                 color="primary"

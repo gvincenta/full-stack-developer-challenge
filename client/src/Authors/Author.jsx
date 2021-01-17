@@ -1,5 +1,8 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+/**
+ * Author card detail with firstName and lastName. 
+ */
 export default function({ firstName, lastName, _id: id }) {
     return (
         <Card className="card-item">
