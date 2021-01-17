@@ -5,6 +5,7 @@ import {TextField} from '@material-ui/core'
 import Autocomplete from '../Autocomplete'
 import Modal from '../Templates/Modal'
 import Book from './Book'
+import FlipCard from './FlipCard'
 
 export default function(props){
   const {id, add} = props
@@ -120,8 +121,7 @@ export default function(props){
     return (
       <>
         <Modal
-        {...props} 
-        size={'lg'}
+        {...props}  
         loading={loading}
         success={success}
         error={error}
@@ -150,7 +150,7 @@ export default function(props){
   
     <TextField
       size='small' 
-      style={{ width: '100%' }}
+      fullWidth
       variant="outlined"
       value={book[field]}
       onChange={ onChange}
@@ -179,7 +179,7 @@ First Name
 
 <TextField
     size='small' 
-    style={{ width: '100%' }}
+    fullWidth
     variant="outlined"
     value={book.author?.firstName}
     onChange={(e) => {
@@ -201,7 +201,7 @@ Last Name
 
 <TextField
     size='small' 
-    style={{ width: '100%' }}
+    fullWidth
     variant="outlined"
     value={book.author?.lastName}
     
@@ -237,13 +237,7 @@ onChange={(e) =>{
 
 }}/>
 </Col>
-</Form.Group>)}
-<h3> More like this... </h3>
-<Row> 
-  <Col>  <Book/> </Col>
-  <Col>  <Book/> </Col>
-  <Col>  <Book/> </Col>
-</Row>
+</Form.Group>)} 
  
 </Form>}
         />
