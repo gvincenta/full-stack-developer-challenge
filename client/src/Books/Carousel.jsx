@@ -1,54 +1,61 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Carousel, Badge} from 'react-bootstrap'
-import image from '../images/BookCover1.jpg'
+import axios from 'axios'
 
+import image from '../images/BookCover1.jpg'
+import Spinner from '../Spinner'
+import Error from '../Error'
 export default function(){
-    return <Carousel>
-    <Carousel.Item>
-      {/* <img
-        className="d-block w-100"
-        src={image}
-        alt="First slide"
-        style={{height: 250, width: '100%'}} 
-      /> */}
-      <div style={{height: 250, width: '100%', background:'black'}}>
-        
-      <img 
-        src={image}
-        alt="First slide"
-        style={{height: '80%', width: '10%', padding:'1%', marginLeft: '30%'}} 
-      />  
-      <div style={{display:'inline'}}>
-                <h1 style={{display:'inline'}} >   Best Seller : Title   </h1> 
-               
-          <p style={{display:'inline', marginTop:10}} > more</p>
-           
-          </div>
-          </div> 
-    </Carousel.Item>
-    <Carousel.Item>
-      <img
-        className="d-block w-100"
-        src="holder.js/800x400?text=Second slide&bg=282c34"
-        alt="Third slide"
-      />
-  
-      <Carousel.Caption>
-        <h3>Second slide label</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item>
-      <img
-        className="d-block w-100"
-        src="holder.js/800x400?text=Third slide&bg=20232a"
-        alt="Third slide"
-      />
-  
-      <Carousel.Caption>
-        <h3>Third slide label</h3>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
-  </Carousel>
+  const [data, setData] = useState([]) 
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+      
+    axios.get('/books')
+    .then(res =>{
+        console.log('AXIOS get all data ', res)
+        const maxHighlight = Math.min(3, res.data.length)
+        setData(res.data.slice(0,maxHighlight))
+        setLoading(false)
+
+    })
+    .catch(e => {
+        console.log('axios error', e)
+        setError(true)
+        setLoading(false)
+    })
+   
+}, []) 
+    return  <>  { loading ?  <div className='carousel-container'> <Spinner/> </div>: error ?  <div className='carousel-container'>  <Error /> </div>  : 
+     <Carousel>
+
+    {   data.length > 0 ?   data.map((v, idx)=> <Carousel.Item key={idx}>
+ 
+ <div className='carousel-container'>
+   
+ <img 
+   src={image}
+   alt='BookCover1.jpg' 
+   style={{height: '80%', width: '10%', padding:'1%', marginLeft: '30%'}} 
+ />   
+           <h1 style={{display:'inline'}} > {idx === 0 ? 'Best Seller' : idx === 1 ? 'Most Popular' : 'New Releases'}   {' : ' + v.name}   </h1> 
+          
+     <p style={{display:'inline' }} >  <a  href={'/book/' + v._id}>  more </a> </p>
+       
+     </div> 
+</Carousel.Item>)
+: <Carousel.Item>
+ 
+<div style={{height: 250, width: '100%', background:'black'}}>
+    
+          <h1 style={{   marginLeft: '30%', paddingTop:'5%'}}  > No data currently available.  </h1> 
+          
+    </div> 
+</Carousel.Item>
+}
+
+ 
+</Carousel>} 
+  </>
 }

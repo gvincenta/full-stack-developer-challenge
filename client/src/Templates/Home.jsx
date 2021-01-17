@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {CardColumns, Form, FormControl, InputGroup, Button} from 'react-bootstrap'
+import {Alert} from 'react-bootstrap'
 import axios from 'axios'
 import {TextField} from '@material-ui/core'
 import Fab from '@material-ui/core/Fab';
@@ -8,15 +8,19 @@ import {
     useParams,
     useRouteMatch
   } from "react-router-dom";
-    
+import Spinner from '../Spinner'
+import Error from '../Error'
+import NoData from '../NoData'
 
 export default function(props){
     const [data, setData] = useState([]) 
     const [add, setAdd] = useState(false) 
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
     console.log('PROPS ARE', props) 
     
-    const {Modal, fetch , Item, search: searchFunction} = props;
+    const {Modal, fetch , Item, search: searchFunction, toolbar} = props;
     const { id } = useParams();
     const [search, setSearch] = useState('')
     console.log('ID ARE', id)
@@ -27,10 +31,12 @@ export default function(props){
         .then(res =>{
             console.log('axios get all data ', res)
             setData(res.data)
+            setLoading(false)
         })
         .catch(e => {
             console.log('axios error', e)
-
+            setLoading(false)
+            setError(true)
         })
        
     }, []) 
@@ -51,11 +57,17 @@ export default function(props){
            setSearch(e.target.value)
        }}
         />
+        {toolbar}
 
             </div>
-            <div style={{display:'grid', gridTemplateColumns:'33% 33% 33%', padding:'auto',  justifyContent: 'center', alignContent: 'center', rowGap:'5%'}}>
-       {search.length === 0 ?  data.map(v => <Item key={v._id} {...v}/>) : searchFunction(data, search).map(v => <Item key={v._id} {...v}/>)  }
-     </div>
+           
+       {
+           loading ?  <Spinner/> : error ? <Error className='homepage-alert'/> : 
+       data.length > 0 ?   <div style={{display:'grid', gridTemplateColumns:'33% 33% 33%', padding:'auto',  justifyContent: 'center', alignContent: 'center', rowGap:'5%'}}>
+          {  search.length === 0 ?  data.map(v => <Item key={v._id} {...v}/>) : searchFunction(data, search).map(v => <Item key={v._id} {...v}/>)}
+            </div>
+        :     <NoData className='homepage-alert'/>}
+     
     <Fab aria-label='Add' style={{ position: 'sticky', bottom: '10%', left: '90%'}} color='primary' onClick={() => setAdd(true)}>
     <AddIcon />
           </Fab>
