@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import { Modal, Button, Spinner, Alert  } from 'react-bootstrap'
-import './Modal.css'
+import { Modal, Button,  Alert  } from 'react-bootstrap' 
+import Spinner from '../Spinner'
+import Error from '../Error'
 export default function({id, success, error, size, fetch, handleClose, title, content, handleSubmit, loading}){ 
 
     // console.log('PROPS ARE', props)
@@ -23,13 +24,10 @@ export default function({id, success, error, size, fetch, handleClose, title, co
             {success &&  <Alert   variant={'info'}>
      Your response has been recorded. You may now close this window. 
   </Alert>}
-  {error &&   <Alert   variant={'danger'}>
-  Sorry, there was a problem. Please try again later.
-  </Alert>}
+  {error &&   <Error/>}
+  
             {loading  ? 
-             <Spinner animation="border" role="status" style={{marginLeft: '50%'}} variant="primary">
-  <span className="sr-only">Loading...</span>
-</Spinner> 
+             <Spinner/>
   : content } 
    
             </Modal.Body>

@@ -13,6 +13,7 @@ import Navbar from './Navbar'
 import Books from './Books'
 import Authors from './Authors'
 
+import  './App.css'
 
 function App() {
   const theme = useMemo(
