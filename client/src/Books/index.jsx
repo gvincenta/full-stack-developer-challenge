@@ -11,36 +11,41 @@ import Book from './Book'
 import Modal from './Modal'
 import FlipCard from './FlipCard'
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 export default function(props){
     const [books, setBooks] = useState([]) 
-    const [add, setAdd] = useState(false) 
+    const [add, setAdd] = useState(false)  
+    const [withPopUp, setWithPopUp] = useState( true );
 
     console.log('PROPS ARE', props) 
     
-    const { id } = useParams();
-    console.log('ID ARE', id)
+    const { id , template} = useParams();
+    console.log('template',template)
+    console.log('ID ARE', id) 
 
-    useEffect(() => {
-      
-        axios.get('/books')
-        .then(res =>{
-            console.log('axios get all books ', res)
-            setBooks([...res.data, ...res.data, ...res.data , ...res.data, ...res.data])
-        })
-        .catch(e => {
-            console.log('axios error', e)
-
-        })
-       
-    }, []) 
 
 
     return (
      <>
       <Carousel/>
+       
         <Home
           fetch='/books'
-          Item={FlipCard}
+          Item={(withPopUp )?  Book :   FlipCard }
+          toolbar={<FormControlLabel
+          
+            control={
+              <Switch
+               
+                checked={withPopUp}
+                onChange={() => { setWithPopUp(!withPopUp); }} 
+                color="primary"
+              />
+            }
+            label={withPopUp ? 'With Pop Up Window and Without Image' : "Flippable and With Image"}
+          />}
           Modal={Modal}
           search={(data, search) => {
             return data.filter(v =>   v.name.toUpperCase().search(search.toUpperCase()) !== -1)
