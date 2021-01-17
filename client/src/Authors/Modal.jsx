@@ -3,7 +3,7 @@ import Modal from "../Templates/Modal";
 import axios from "axios";
 import { Form, Col, Row } from "react-bootstrap";
 import { TextField } from "@material-ui/core";
-import config from '../config.json'
+import config from "../config.json";
 /**
  *  Author modal logic.
  */
@@ -14,7 +14,8 @@ export default function(props) {
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
     const [formError, setFormError] = useState({});
-    const validate = () => { //author modal validation (must have firstName and lastName filled).
+    const validate = () => {
+        //author modal validation (must have firstName and lastName filled).
         console.log("CHECKING..", { author });
 
         const newState = {

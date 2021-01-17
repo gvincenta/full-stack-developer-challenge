@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState } from "react";
 import { useParams, useRouteMatch } from "react-router-dom";
 
 import Home from "../Templates/Home";
@@ -6,7 +6,7 @@ import Carousel from "./Carousel";
 import Book from "./Book";
 import Modal from "./Modal";
 import FlipCard from "./FlipCard";
- 
+
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 export default function(props) {
@@ -27,7 +27,8 @@ export default function(props) {
             <Home
                 fetch="/books"
                 Item={withPopUp ? Book : FlipCard}
-                toolbar={ //toggle between 2 layouts. 
+                toolbar={
+                    //toggle between 2 layouts.
                     <FormControlLabel
                         control={
                             <Switch
@@ -45,7 +46,8 @@ export default function(props) {
                         }
                     />
                 }
-                sortData={data => { //sort by book's name ascending. 
+                sortData={data => {
+                    //sort by book's name ascending.
                     return data.sort((left, right) => {
                         return left.name
                             .toUpperCase()
@@ -53,7 +55,8 @@ export default function(props) {
                     });
                 }}
                 Modal={Modal}
-                search={(data, search) => { //search filter.
+                search={(data, search) => {
+                    //search filter.
                     return data.filter(
                         v =>
                             v.name

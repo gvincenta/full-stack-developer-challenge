@@ -5,7 +5,7 @@ import Error from "../Error";
 /**
  * Modal layout.
  */
-import config from '../config.json'
+import config from "../config.json";
 export default function({
     id,
     success,
@@ -30,9 +30,7 @@ export default function({
                 </Modal.Header>
                 <Modal.Body>
                     {success && (
-                        <Alert variant={"info"}>
-                            {config.message.success}
-                        </Alert>
+                        <Alert variant={"info"}>{config.message.success}</Alert>
                     )}
                     {error && <Error />}
 

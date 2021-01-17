@@ -70,7 +70,7 @@ export default function(props) {
                 {toolbar}
             </div>
 
-            {loading ? ( //loading state 
+            {loading ? ( //loading state
                 <Spinner />
             ) : error ? ( //error state
                 <Error className="homepage-alert" />
@@ -90,11 +90,12 @@ export default function(props) {
                               <Item key={v._id} {...v} />
                           ))}
                 </div>
-            ) : ( //no data state 
+            ) : (
+                //no data state
                 <NoData className="homepage-alert" />
             )}
             {/* floating action button on bottom right: */}
-            <Fab 
+            <Fab
                 aria-label="Add"
                 style={{ position: "sticky", bottom: "10%", left: "90%" }}
                 color="primary"

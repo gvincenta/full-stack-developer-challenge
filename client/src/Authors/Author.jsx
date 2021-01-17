@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 /**
- * Author card detail with firstName and lastName. 
+ * Author card detail with firstName and lastName.
  */
 export default function({ firstName, lastName, _id: id }) {
     return (

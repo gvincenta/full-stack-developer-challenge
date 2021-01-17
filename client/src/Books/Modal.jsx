@@ -6,9 +6,9 @@ import Autocomplete from "../Autocomplete";
 import Modal from "../Templates/Modal";
 import Book from "./Book";
 import FlipCard from "./FlipCard";
-import config from '../config.json'
+import config from "../config.json";
 /**
- *  Book modal details. 
+ *  Book modal details.
  */
 export default function(props) {
     const { id, add } = props;
@@ -20,14 +20,15 @@ export default function(props) {
 
     const [formError, setFormError] = useState({});
     const [authorMode, setAuthorMode] = useState("Assign Existing");
-    const validate = () => { //validate book and author details. 
+    const validate = () => {
+        //validate book and author details.
         console.log("CHECKING..", { book });
 
         const newState = {
             name: (!book.name || book.name?.length < 1) && "Name is required.",
             isbn: (!book.isbn || book.isbn?.length < 1) && "ISBN is required.",
             author:
-                authorMode === "Assign Existing" 
+                authorMode === "Assign Existing"
                     ? (!book.author || book.author?.length < 1) &&
                       "Author is required."
                     : {
