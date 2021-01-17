@@ -1,10 +1,11 @@
 import React from 'react'
 import {Card, Button} from 'react-bootstrap'
+import '../Templates/Modal'
 export default function({name, isbn, _id : id}){
      
-    return (<Card style={{width:'75%'}}> 
+    return (<Card className='card-item'> 
         <Card.Body>
-          <Card.Title> <Card.Link  href={'/book/' + id}> {name} </Card.Link> </Card.Title> 
+          <Card.Title> <Card.Link    href={'/book/' + id}> {name} </Card.Link> </Card.Title> 
           
         </Card.Body> 
       </Card>)
