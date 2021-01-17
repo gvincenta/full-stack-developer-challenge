@@ -1,0 +1,7 @@
+{
+    "loading": 1500,
+    "message": {
+        "noData": "No data currently available.",
+        "success": "Your response has been recorded. You may now close this window."
+    }
+}

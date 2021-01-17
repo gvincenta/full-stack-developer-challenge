@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+.modal-content{
+    border-radius: 20px 20px 20px 20px !important;
+    background: #212121 !important;
+    border:none;
+} 
+.card {
+    border-radius: 20px 20px 20px 20px !important;
+}
+button.close{
+    color:white !important;
+}
+.modal-footer{
+    border:none !important;
+    justify-content: center !important;
+}
+.modal-header{
+    border:none !important;
+}
+body{
+    background:#412D21 !important;
+}
+.btn-primary{ 
+    background-color:#AB7742 !important;
+    border-color: #AB7742 !important;
+} 
+
+.no-overflow{
+    overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+} 
+
+.homepage-alert{
+    justify-content:center;
+    width:80%;
+    margin:auto;
+}
+.spinner-border.text-primary{
+    color:#AB7742 !important;
+} 
+.carousel-container{
+    height: 250;
+    width: 100%;
+    background:black;
+}
+.card-item{
+  width:65%;
+  justify-self:center;
+  background: #AB7742 !important;
+  color:white
+}
+a{
+    color: white !important;
+    text-decoration: underline !important;
+}
+.navbar-brand{
+    text-decoration: none !important;
+
+}
+.nav-link{
+    text-decoration: none !important;
+
+}
+.nav-link.active{
+    background: #363636;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dropdown-menu.show{
+    background: #AB7742;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.dropdown-item{
+    text-decoration : none !important;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdown-item:hover{
+    background: grey !important;
 }
