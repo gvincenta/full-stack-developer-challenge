@@ -46,6 +46,11 @@ export default function(props){
             }
             label={withPopUp ? 'With Pop Up Window and Without Image' : "Flippable and With Image"}
           />}
+          sortData={(data) => {
+            return data.sort((left, right) => {
+              return left.name.toUpperCase().localeCompare(right.name.toUpperCase())
+            })
+          }}
           Modal={Modal}
           search={(data, search) => {
             return data.filter(v =>   v.name.toUpperCase().search(search.toUpperCase()) !== -1)

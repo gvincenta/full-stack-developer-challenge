@@ -11,6 +11,11 @@ export default function(props){
         <>
           <Home
           fetch='/authors'
+          sortData = {data => {
+            return data.sort((left, right) => {
+              return left.lastName.toUpperCase().localeCompare(right.lastName.toUpperCase());
+            })
+          }}
           Item={Author}
           Modal={Modal}
           search={(data, search) => {

@@ -20,7 +20,7 @@ export default function(props){
 
     console.log('PROPS ARE', props) 
     
-    const {Modal, fetch , Item, search: searchFunction, toolbar} = props;
+    const {Modal, fetch , Item, search: searchFunction, toolbar, sortData} = props;
     const { id } = useParams();
     const [search, setSearch] = useState('')
     console.log('ID ARE', id)
@@ -30,7 +30,7 @@ export default function(props){
         axios.get(fetch)
         .then(res =>{
             console.log('axios get all data ', res)
-            setData(res.data)
+            setData( sortData ? sortData(res.data|| []) : res.data || [])
             setLoading(false)
         })
         .catch(e => {
