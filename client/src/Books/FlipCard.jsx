@@ -23,20 +23,12 @@ export default function ({name, isbn, _id : id} ){
      }, [id])
   return ( 
   <FlipCard
-  front={  <Card.Body  >   <Card.Img variant="top" src={image} style={{width: '50%' , height: '50%'}}/> <h6 style={{marginTop:'5%',   overflow: 'hidden',
-  textOverflow:'ellipsis', whiteSpace:'nowrap'}}  > {name}  </h6>  </Card.Body>}
+  front={  <Card.Body  >   <Card.Img variant="top" src={image} style={{width: '35%' , height: '35%'}}/> <p className='no-overflow' style={{marginTop:'5%'}}  > {name}  </p>  </Card.Body>}
   back={<Card.Body>  
-  <Card.Img variant="top" src={image} style={{width: '35%' , height: '35%'}}/> 
+  <Card.Img variant="top" src={image} style={{width: '25%' , height: '25%'}}/> 
     
-    <p style={{    overflow: 'hidden',
-  textOverflow:'ellipsis', whiteSpace:'nowrap'}} >  {name} </p>
-    <p style={{  overflow: 'hidden',
-  textOverflow:'ellipsis', whiteSpace:'nowrap'}} > {isbn} </p>
-    <p style={{   overflow: 'hidden',
-  textOverflow:'ellipsis', whiteSpace:'nowrap'}} > {book.author?.lastName + ' , '+ book.author?.firstName} </p>
-   {/* <Card.Body style={{padding:'2%'}}>   <Card.Img variant="top" src={image} style={{width: '35%' , height: '35%'}}/>  */}
+    <p className='no-overflow' style={{marginTop: '5%', textAlign:'left'}} >  {'Name: ' + name} <br/> {'ISBN: ' +  isbn} <br/>  {'Author: ' + book.author?.lastName + ' , '+ book.author?.firstName}  </p>
   
-  {/* <p style={{  display:'inline'}}  > {name}  {name} </p>    */}
    </Card.Body> }
    /> );
 } 
