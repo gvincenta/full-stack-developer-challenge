@@ -27,7 +27,7 @@ Please Note:
 - For Database URL:
 
 # Project Structure
-All backend-related files are in `/server`, while all frontend related files are in `/client`. 
+All backend-related files are in [/server](server), while all frontend related files are in [/client](client). 
 ## Backend
 Using MVC Architecture (with ReactJS handling all its views), 
 - Models are in `/models`.
