@@ -1,7 +1,7 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
 
-export default function(props) {
+export default function SpinnerComponent(props) {
     return (
         <Spinner
             animation="border"

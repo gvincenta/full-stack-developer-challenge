@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useRouteMatch } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Home from "../Templates/Home";
 import Carousel from "./Carousel";
@@ -9,9 +9,7 @@ import FlipCard from "./FlipCard";
 
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-export default function(props) {
-    const [books, setBooks] = useState([]);
-    const [add, setAdd] = useState(false);
+export default function BookHome(props) { 
     const [withPopUp, setWithPopUp] = useState(true);
 
     console.log("PROPS ARE", props);

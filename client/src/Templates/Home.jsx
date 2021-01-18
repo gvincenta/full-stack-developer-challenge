@@ -1,34 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Alert } from "react-bootstrap";
 import axios from "axios";
 import { TextField } from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Spinner from "../Spinner";
 import Error from "../Error";
 import NoData from "../NoData";
 /**
  * Homepage layout.
+ * @param Modal : Modal component to be displayed.
+ * @param fetch: backend endpoint to be fetched from.
+ * @param Item : each individual item's component to be displayed.
+ * @param search : search function applied when search bar isn't empty. 
+ * @param toolbar: tools to be displayed next to / below search bar. 
+ * @param sortData : sorting data function to be used. 
+ * @return a  homepage with: search bar, additional toolbar(s), each individual item displayed, a floating action button that opens up a modal.
  */
-export default function(props) {
+export default function HomeTemplate({
+    Modal,
+    fetch,
+    Item,
+    search: searchFunction,
+    toolbar,
+    sortData
+}) {
     const [data, setData] = useState([]);
     const [add, setAdd] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
-    console.log("PROPS ARE", props);
-
-    const {
-        Modal,
-        fetch,
-        Item,
-        search: searchFunction,
-        toolbar,
-        sortData
-    } = props;
+ 
+ 
     const { id } = useParams();
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState(""); 
+
     console.log("ID ARE", id);
 
     useEffect(() => {
@@ -55,19 +60,24 @@ export default function(props) {
                     padding: 10,
                     margin: "auto"
                 }}>
-                <TextField
+                <TextField //searchbar 
                     size="small"
                     fullWidth
                     variant="outlined"
                     placeholder="Search..."
+                    
+                    helperText={search.length === 0
+                        ? 'Showing ' + data.length + ' results' 
+                        : 'Showing ' + searchFunction(data, search).length   + ' results'}
                     value={search}
                     onChange={e => {
                         console.log("e.target", e.target.value, search);
 
-                        setSearch(e.target.value);
+                        setSearch(e.target.value); 
                     }}
                 />
-                {toolbar}
+                {/* additional toolbars: */}
+                {toolbar} 
             </div>
 
             {loading ? ( //loading state
@@ -82,7 +92,7 @@ export default function(props) {
                         padding: "auto",
                         justifyContent: "center",
                         alignContent: "center",
-                        rowGap: "5%"
+                        rowGap: "5%",
                     }}>
                     {search.length === 0
                         ? data.map(v => <Item key={v._id} {...v} />)

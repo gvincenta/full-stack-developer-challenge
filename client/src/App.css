@@ -25,7 +25,7 @@ body{
 } 
 
 .no-overflow{
-    overflow: hidden;
+  overflow: hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 } 
@@ -73,5 +73,5 @@ a{
     text-decoration : none !important;
 }
 .dropdown-item:hover{
-    background: grey !important;
+    background:#6C757D !important;
 }

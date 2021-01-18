@@ -1,40 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
 import Spinner from "../Spinner";
 import Error from "../Error";
+import config from "../config.json";
 /**
  * Modal layout.
+ * @param success : indicates form has been successfully submitted to backend.
+ * @param error : indicates there are some backend errors.
+ * @param handleClose : function handling close action.
+ * @param title : title of modal.
+ * @param content : components of modal content to be displayed. 
+ * @param handleSubmit : function handling submit action. 
+ * @param loading :  indicates form is currently being submitted to backend.
+ * @return a modal layout. 
  */
-import config from "../config.json";
-export default function({
-    id,
+export default function ModalTemplate({ 
     success,
-    error,
-    size,
-    fetch,
+    error,  
     handleClose,
     title,
     content,
     handleSubmit,
     loading
-}) {
-    // console.log('PROPS ARE', props)
-    console.log("ID ARE", id);
-    const [show, setShow] = useState(true);
+}) {  
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} size={size}>
+            <Modal show={true} onHide={handleClose}  >
                 <Modal.Header closeButton>
                     <Modal.Title> {title} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {success && (
+                    {success && ( //success state.
                         <Alert variant={"info"}>{config.message.success}</Alert>
                     )}
-                    {error && <Error />}
+                    {error //error state
+                     && <Error /> }
 
-                    {loading ? <Spinner /> : content}
+                    {loading //loading state
+                     ? <Spinner /> 
+                     : //normal state
+                     content}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

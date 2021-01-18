@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 /**
  * 404 component.
  */
-export default function(props) {
+export default function PageNotFoundAlert(props) {
     return (
         <Alert variant={"danger"} {...props}>
             Error 404 - Not Found <br /> The resource you are looking for has

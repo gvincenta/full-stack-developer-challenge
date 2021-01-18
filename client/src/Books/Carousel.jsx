@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Carousel, Badge } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import axios from "axios";
 
 import image from "../images/BookCover1.jpg";
@@ -9,7 +9,7 @@ import config from "../config.json";
 /**
  * Book carousel showing: Best Seller, Most Popular, and New Releases.
  */
-export default function() {
+export default function BookCarousel() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -19,7 +19,8 @@ export default function() {
             .get("/books")
             .then(res => {
                 console.log("AXIOS get all data ", res);
-                const maxHighlight = Math.min(3, res.data.length);
+                /*takes in up to first 3 books returned from backend.*/
+                const maxHighlight = Math.min(3, res.data.length); //allow up to 3 books on carousel.
                 setData(res.data.slice(0, maxHighlight));
                 setLoading(false);
             })
@@ -32,21 +33,21 @@ export default function() {
     return (
         <>
             {" "}
-            {loading ? (
+            {loading ? ( //loading state
                 <div className="carousel-container">
                     {" "}
                     <Spinner />{" "}
                 </div>
-            ) : error ? (
+            ) : error ? ( //error state
                 <div className="carousel-container">
                     {" "}
                     <Error />{" "}
                 </div>
             ) : (
                 <Carousel>
-                    {data.length > 0 ? (
+                    {data.length > 0 ? ( //there are some data
                         data.map((v, idx) => (
-                            <Carousel.Item key={idx}>
+                            <Carousel.Item key={idx} className="no-overflow">
                                 <div className="carousel-container">
                                     <img
                                         src={image}
@@ -58,7 +59,7 @@ export default function() {
                                             marginLeft: "30%"
                                         }}
                                     />
-                                    <h1 style={{ display: "inline" }}>
+                                    <h1 style={{ display: "inline" }} >
                                         {" "}
                                         {idx === 0
                                             ? "Best Seller"
@@ -78,7 +79,7 @@ export default function() {
                                 </div>
                             </Carousel.Item>
                         ))
-                    ) : (
+                    ) : ( //no data available.
                         <Carousel.Item>
                             <div
                                 style={{

@@ -1,31 +1,41 @@
 import React, { useEffect, useState } from "react";
 import FlipCard from "../Templates/FlipCard";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import axios from "axios";
 import image from "../images/BookCover1.jpg";
 
 /**
  *  Book card detail with flippable content.
+ * @param name: name of the book to be displayed. 
+ * @param isbn: isbn of the book to be displayed.
+ * @param _id : id of the book to be fetched from backend.
+ * @return A flippable Card component that shows the book's details when flipped. 
  */
-export default function({ name, isbn, _id: id }) {
+export default function BookFlipCard({ name, isbn, _id: id }) {
     const [book, setBook] = useState({});
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         //get from /book/:id
         if (id) {
             axios
                 .get("/book", { params: { id } })
-                .then(res => {
-                    console.log("axios get specific book ", res);
+                .then(res => { 
+                    setLoading(false);
                     setBook(res.data);
                 })
                 .catch(e => {
                     console.log("axios error", e);
+                    setLoading(false);
+                    setError(true);
                 });
         }
     }, [id]);
     return (
         <FlipCard
+            loading={loading}
+            error={error}
             front={
                 //only shows book's name.
                 <Card.Body>
