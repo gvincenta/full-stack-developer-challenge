@@ -37,14 +37,14 @@ Using MVC Architecture (with ReactJS handling all its views),
     - DB Connection is established in [db.js](server/models/db.js). 
 - Controllers are in [/controllers](server/controllers).
 - API routing are in [/routes](server/routes).
-- Please ignore the [/views](server/views) and  [/views](server/public) directory.
+- Please ignore the [/views](server/views) and  [/public](server/public) directory.
 ## Frontend
 All components are in [/src](client/src). 
-- [/Books](client/Books) - has all the components for showing book details and homepage. 
-- [/Authors](client/Authors) - has all the components for showing author details and homepage. 
-- [/Templates](client/Templates) - is responsible for the general layout of homepage, modal, flippable card, and card. 
-- [/Components](client/Components) - contains all the reusable components, e.g. 404 - Page Not Found Alerts. 
-- [App.jsx](client/App.jsx) - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
+- [/Books](client/src/Books) - has all the components for showing book details and homepage. 
+- [/Authors](client/src/Authors) - has all the components for showing author details and homepage. 
+- [/Templates](client/src/Templates) - is responsible for the general layout of homepage, modal, flippable card, and card. 
+- [/Components](client/src/Components) - contains all the reusable components, e.g. 404 - Page Not Found Alerts. 
+- [App.jsx](client/src/App.jsx) - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
 
 # Backend 
 ## Endpoints
