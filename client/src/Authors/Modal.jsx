@@ -13,7 +13,7 @@ import config from "../config.json";
 export default function AuthorModal(props) {
     const { id, add } = props;
     const [author, setAuthor] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!add);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
     const [formError, setFormError] = useState({});
