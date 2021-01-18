@@ -5,14 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan'); 
 
 //db setup
-require("./models/db.js");
+require("./server/models/db.js");
 
 //routes import
-var indexRouter = require('./routes/index');
-var bookRouter = require('./routes/book');
-var booksRouter = require('./routes/books');
-var authorRouter = require('./routes/author');
-var authorsRouter = require('./routes/authors');
+var indexRouter = require('./server/routes/index');
+var bookRouter = require('./server/routes/book');
+var booksRouter = require('./server/routes/books');
+var authorRouter = require('./server/routes/author');
+var authorsRouter = require('./server/routes/authors');
 
 var app = express();
 
@@ -26,7 +26,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
  
 //routes setup
 app.use('/api', indexRouter);
@@ -36,11 +35,11 @@ app.use('/api/books', booksRouter);
 app.use('/api/authors', authorsRouter);
 
 //react setup 
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "../client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 
