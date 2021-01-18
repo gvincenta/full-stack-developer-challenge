@@ -7,7 +7,7 @@ import config from "../config.json";
 export default function NoDataAlert(props) {
     return (
         <Alert variant={"info"} {...props}>
-            {config.message.success}
+            {config.message.noData}
         </Alert>
     );
 }
