@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Spinner from "../Spinner";
 import Error from "../Components/Error";
 import NoData from "../Components/NoData";
+import config from '../config.json'
 /**
  * Homepage layout.
  * @param Modal : Modal component to be displayed.
@@ -38,7 +39,7 @@ export default function HomeTemplate({
 
     useEffect(() => {
         axios
-            .get(fetch)
+            .get(config.baseURL + fetch)
             .then(res => {
                 console.log("axios get all data ", res);
                 setData(sortData ? sortData(res.data || []) : res.data || []);

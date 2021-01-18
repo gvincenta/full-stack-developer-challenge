@@ -1,4 +1,5 @@
-# How to run 
+# How To Run
+## Locally
 1. clone this project. 
 2. Make sure you have the following installed : MongoDB, NPM, ExpressJS, NodeJS, ReactJS. 
 3. cd to the root of this project directory. 
@@ -10,7 +11,8 @@
 
 Please Note:
 - This project was developed with yarn as the package manager, so using yarn is preferred. 
-- backend is hosted at port 5000, frontend is hosted at port 3000.
+- backend is hosted at http://localhost:5000/api/ .
+- frontend is hosted at port http://localhost:3000/ .
 
 # Project Stack
 - Backend: ExpressJS and NodeJS.
@@ -105,7 +107,7 @@ Author's form contains First Name and Last Name.
 For simplicity, form is validated only after hitting 'Add' button. 
 # Github Branches
 To avoid confusions with other candidates' responses, each branch I have worked onis prefixed with 'gilbert-'. 
-# Possible improvements
+# Possible Improvements / Extensions
 - use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/) when the scale of the app grows significantly bigger. This will avoid the need to pass down loading/success/error states too.
 - we can see repeating patterns of handling loading and error states in templates and useEffect(), which could possibly be refactored with redux / xstate. 
 - if we decide to go with the flippable card, a more efficient way to fetch all books with their author details would be required, especially if we are dealing with 100s of books. 

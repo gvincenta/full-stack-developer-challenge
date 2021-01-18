@@ -6,7 +6,11 @@
     "start": "node ./server/bin/www",
     "server-dev": "nodemon ./server/bin/www",
     "client-dev": "yarn --cwd client start",
-    "start-dev": "concurrently \"yarn run server-dev\" \"yarn run client-dev\""
+    "start-dev": "concurrently \"yarn run server-dev\" \"yarn run client-dev\"",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
+  },
+  "engines": {
+    "yarn": "1.22.5"
   },
   "dependencies": {
     "@material-ui/icons": "^4.11.2",

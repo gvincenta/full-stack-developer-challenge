@@ -3,6 +3,7 @@ import FlipCard from "../Templates/FlipCard";
 import { Card } from "react-bootstrap";
 import axios from "axios";
 import image from "../images/BookCover1.jpg";
+import config from '../config.json';
 
 /**
  *  Book card detail with flippable content.
@@ -20,7 +21,7 @@ export default function BookFlipCard({ name, isbn, _id: id }) {
         //get from /book/:id
         if (id) {
             axios
-                .get("/book", { params: { id } })
+                .get(config.baseURL + "/book", { params: { id } })
                 .then(res => { 
                     setLoading(false);
                     setBook(res.data);

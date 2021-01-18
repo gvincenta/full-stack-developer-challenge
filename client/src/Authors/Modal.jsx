@@ -51,7 +51,7 @@ export default function AuthorModal(props) {
         }
         //posts to /author.
         axios
-            .post("/author", author)
+            .post(config.baseURL + "/author", author)
             .then(res => {
                 console.log("SUBMITTED", res);
                 setTimeout(() => {
@@ -71,7 +71,7 @@ export default function AuthorModal(props) {
     useEffect(() => {
         if (id) {
             axios
-                .get("/author/", { params: { id } }) //get from /author/:id
+                .get(config.baseURL +"/author/", { params: { id } }) //get from /author/:id
                 .then(res => {
                     console.log("axios get specific book ", res);
                     setAuthor(res.data);

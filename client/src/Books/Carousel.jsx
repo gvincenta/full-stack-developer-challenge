@@ -16,7 +16,7 @@ export default function BookCarousel() {
 
     useEffect(() => {
         axios
-            .get("/books")
+            .get(config.baseURL + "/books")
             .then(res => {
                 console.log("AXIOS get all data ", res);
                 /*takes in up to first 3 books returned from backend.*/
