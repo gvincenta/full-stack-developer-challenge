@@ -21,17 +21,21 @@ Please Note:
 
 # Project Stack
 - Backend: ExpressJS and NodeJS.
-- Database : MongoDB. 
+- Database : MongoDB with Mongoose. 
 - Frontend : ReactJS with React-Bootstrap and Material UI. 
+### Changing target Database URL and Backend Target Port :
+- For Database URL:
 
 # Project Structure
 All backend-related files are in `/server`, while all frontend related files are in `/client`. 
-# Backend
+## Backend
 Using MVC Architecture (with ReactJS handling all its views), 
 - Models are in `/models`.
+    - DB Connection is established in [db.js](server/models/db.js). 
 - Controllers are in `/controllers`.
-- Please ignore the `/views` directory.
-# Frontend
+- API routing are in `/routes`.
+- Please ignore the `/views` and `/public` directory.
+## Frontend
 All components are in `/src`. 
 - `/Books` - has all the components for showing book details and homepage. 
 - `/Authors` - has all the components for showing author details and homepage. 
