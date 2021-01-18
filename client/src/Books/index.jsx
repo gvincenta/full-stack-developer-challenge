@@ -10,11 +10,11 @@ import FlipCard from "./FlipCard";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 /**
- * Book homepage. 
+ * Book homepage.
  */
-export default function BookHome(props) { 
-    const [withPopUp, setWithPopUp] = useState(true); 
-    const { id, template } = useParams(); 
+export default function BookHome(props) {
+    const [withPopUp, setWithPopUp] = useState(true);
+    const { id, template } = useParams();
 
     return (
         <>
@@ -42,7 +42,7 @@ export default function BookHome(props) {
                         }
                     />
                 }
-                sortData={data => {
+                sortData={(data) => {
                     //sort by book's name ascending.
                     return data.sort((left, right) => {
                         return left.name
@@ -54,7 +54,7 @@ export default function BookHome(props) {
                 search={(data, search) => {
                     //search filter.
                     return data.filter(
-                        v =>
+                        (v) =>
                             v.name
                                 .toUpperCase()
                                 .search(search.toUpperCase()) !== -1

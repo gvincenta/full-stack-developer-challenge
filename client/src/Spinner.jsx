@@ -8,7 +8,8 @@ export default function SpinnerComponent(props) {
             role="status"
             style={{ marginLeft: "50%" }}
             variant="primary"
-            {...props}>
+            {...props}
+        >
             <span className="sr-only">Loading...</span>
         </Spinner>
     );

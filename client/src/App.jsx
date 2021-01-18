@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"; 
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -8,7 +8,7 @@ import Books from "./Books";
 import Authors from "./Authors";
 import NotFound from "./Components/NotFound";
 import "./App.css";
-import config from './config.json';
+import config from "./config.json";
 /**
  * entry point of the web-app.
  */
@@ -19,18 +19,19 @@ function App() {
             createMuiTheme({
                 typography: {
                     button: {
-                        textTransform: "none"
-                    }
+                        textTransform: "none",
+                    },
                 },
-                palette: { //using dark theme pallete to match UI color schemes.
+                palette: {
+                    //using dark theme pallete to match UI color schemes.
                     type: "dark",
                     primary: {
-                        main:   config.styles.colors.primary
+                        main: config.styles.colors.primary,
                     },
-                    secondary:{
-                        main:   config.styles.colors.secondary
-                    }
-                }
+                    secondary: {
+                        main: config.styles.colors.secondary,
+                    },
+                },
             }),
         []
     );
@@ -39,12 +40,12 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Navbar />
-             <BrowserRouter>
+            <BrowserRouter>
                 <Switch>
                     <Route exact path="/books">
                         <Books />
                     </Route>
-                    <Route exact path="/"> 
+                    <Route exact path="/">
                         <Redirect to="/books" />
                     </Route>
 
@@ -61,7 +62,7 @@ function App() {
                     <Route path="*" component={NotFound} />
                 </Switch>
             </BrowserRouter>
-         </ThemeProvider>
+        </ThemeProvider>
     );
 }
 

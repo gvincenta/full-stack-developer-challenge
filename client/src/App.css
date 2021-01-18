@@ -1,77 +1,74 @@
-.modal-content{
+.modal-content {
     border-radius: 20px 20px 20px 20px !important;
     background: #212121 !important;
-    border:none;
-} 
+    border: none;
+}
 .card {
     border-radius: 20px 20px 20px 20px !important;
 }
-button.close{
-    color:white !important;
+button.close {
+    color: white !important;
 }
-.modal-footer{
-    border:none !important;
+.modal-footer {
+    border: none !important;
     justify-content: center !important;
 }
-.modal-header{
-    border:none !important;
+.modal-header {
+    border: none !important;
 }
-body{
-    background:#412D21 !important;
+body {
+    background: #412d21 !important;
 }
-.btn-primary{ 
-    background-color:#AB7742 !important;
-    border-color: #AB7742 !important;
-} 
+.btn-primary {
+    background-color: #ab7742 !important;
+    border-color: #ab7742 !important;
+}
 
-.no-overflow{
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-} 
-
-.homepage-alert{
-    justify-content:center;
-    width:80%;
-    margin:auto;
+.no-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-.spinner-border.text-primary{
-    color:#AB7742 !important;
-} 
-.carousel-container{
+
+.homepage-alert {
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+.spinner-border.text-primary {
+    color: #ab7742 !important;
+}
+.carousel-container {
     height: 250;
     width: 100%;
-    background:black;
+    background: black;
 }
-.card-item{
-  width:65%;
-  justify-self:center;
-  background: #AB7742 !important;
-  color:white
+.card-item {
+    width: 65%;
+    justify-self: center;
+    background: #ab7742 !important;
+    color: white;
 }
-a{
+a {
     color: white !important;
     text-decoration: underline !important;
 }
-.navbar-brand{
+.navbar-brand {
     text-decoration: none !important;
-
 }
-.nav-link{
+.nav-link {
     text-decoration: none !important;
-
 }
-.nav-link.active{
+.nav-link.active {
     background: #363636;
-
 }
 
-.dropdown-menu.show{
-    background: #AB7742;
+.dropdown-menu.show {
+    background: #ab7742;
 }
-.dropdown-item{
-    text-decoration : none !important;
+.dropdown-item {
+    text-decoration: none !important;
 }
-.dropdown-item:hover{
-    background:#6C757D !important;
+.dropdown-item:hover {
+    background: #6c757d !important;
 }

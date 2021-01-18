@@ -3,13 +3,13 @@ import { Form, Col, Row, Dropdown, DropdownButton } from "react-bootstrap";
 import axios from "axios";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "../Components/Autocomplete";
-import Modal from "../Templates/Modal"; 
+import Modal from "../Templates/Modal";
 import config from "../config.json";
 /**
  *  Book modal (with form) details.
  * @param add: whether modal is for adding new book or just displaying book details,
- * @param id : id of the book to be fetched from backend. 
- * @return a modal to display a book's (and its author) details / a form to add new book (with existing or new authors). 
+ * @param id : id of the book to be fetched from backend.
+ * @return a modal to display a book's (and its author) details / a form to add new book (with existing or new authors).
  */
 export default function BookModal(props) {
     const { id, add } = props;
@@ -24,7 +24,7 @@ export default function BookModal(props) {
     const validate = () => {
         //validate book and author details.
         //book must have an isbn and a name.
-        //book must be assigned to existing author, or with new author. 
+        //book must be assigned to existing author, or with new author.
 
         const newState = {
             name: (!book.name || book.name?.length < 1) && "Name is required.",
@@ -41,8 +41,8 @@ export default function BookModal(props) {
                           lastName:
                               (!book.author?.lastName ||
                                   book.author?.lastName?.length < 1) &&
-                              "Last Name is required."
-                      }
+                              "Last Name is required.",
+                      },
         };
         setFormError(newState);
 
@@ -52,12 +52,12 @@ export default function BookModal(props) {
             (authorMode === "Assign Existing" && newState.author) ||
             (authorMode === "Add New" &&
                 (newState.author?.firstName || newState.author?.lastName))
-        ) { 
+        ) {
             return false;
         }
         return true;
     };
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setSuccess(null);
@@ -68,46 +68,51 @@ export default function BookModal(props) {
             //there is an error.
             setLoading(false);
             return;
-        } 
+        }
 
         /* for assigning existing authors, book has {author: authorID}
         for adding new author, book has {author: {firstName, lastName}}  */
- 
 
         if (authorMode === "Add New") {
-            axios.post("author", book.author).then( createAuthorResponse => {
-               axios
-           .post( "/book", { ...book, author:  createAuthorResponse.data._id })
-           .then(res => { 
-               setTimeout(() => {
-                   setLoading(false);
-                   setSuccess(true);
-               }, config.loading);
-           })
-           .catch(e => { 
-               setTimeout(() => {
-                   setLoading(false);
-                   setError(true);
-               }, config.loading);
-           }); 
-           }).catch( error2 => { 
-               setTimeout(() => {
-                   setLoading(false);
-                   setError(true);
-               }, config.loading);
-           })
-           return;  
-       }
- 
+            axios
+                .post("author", book.author)
+                .then((createAuthorResponse) => {
+                    axios
+                        .post("/book", {
+                            ...book,
+                            author: createAuthorResponse.data._id,
+                        })
+                        .then((res) => {
+                            setTimeout(() => {
+                                setLoading(false);
+                                setSuccess(true);
+                            }, config.loading);
+                        })
+                        .catch((e) => {
+                            setTimeout(() => {
+                                setLoading(false);
+                                setError(true);
+                            }, config.loading);
+                        });
+                })
+                .catch((error2) => {
+                    setTimeout(() => {
+                        setLoading(false);
+                        setError(true);
+                    }, config.loading);
+                });
+            return;
+        }
+
         axios
-            .post("/book",  book )
-            .then(res => { 
+            .post("/book", book)
+            .then((res) => {
                 setTimeout(() => {
                     setLoading(false);
                     setSuccess(true);
                 }, config.loading);
             })
-            .catch(e => { 
+            .catch((e) => {
                 setTimeout(() => {
                     setLoading(false);
                     setError(true);
@@ -118,13 +123,13 @@ export default function BookModal(props) {
         if (id) {
             axios
                 .get("/book", { params: { id } })
-                .then(res => { 
+                .then((res) => {
                     setBook(res.data);
                     setLoading(false);
                 })
-                .catch(e => { 
+                .catch((e) => {
                     setLoading(false);
-                   setError(true);
+                    setError(true);
                 });
         }
     }, [id]);
@@ -132,10 +137,10 @@ export default function BookModal(props) {
         if (!id && authorMode === "Assign Existing") {
             axios
                 .get("/authors")
-                .then(res => { 
+                .then((res) => {
                     setAuthors(res.data);
                 })
-                .catch(e => {
+                .catch((e) => {
                     setError(true);
                 });
         }
@@ -159,17 +164,17 @@ export default function BookModal(props) {
                             {
                                 label: "Name",
                                 field: "name",
-                                onChange: e => {
+                                onChange: (e) => {
                                     setBook({ ...book, name: e.target.value });
-                                }
+                                },
                             },
                             {
                                 label: "ISBN",
                                 field: "isbn",
-                                onChange: e => {
+                                onChange: (e) => {
                                     setBook({ ...book, isbn: e.target.value });
-                                }
-                            }
+                                },
+                            },
                         ].map(({ label, field, onChange }, idx) => (
                             <Form.Group as={Row} key={idx}>
                                 <Form.Label column sm="3">
@@ -195,19 +200,28 @@ export default function BookModal(props) {
                                 id="dropdown-basic-button"
                                 title={authorMode}
                                 style={{ display: "inline" }}
-                                size="sm">
+                                size="sm"
+                            >
                                 <Dropdown.Item
                                     onClick={() => {
-                                        setFormError({...formError, author: false});
+                                        setFormError({
+                                            ...formError,
+                                            author: false,
+                                        });
                                         setAuthorMode("Assign Existing");
-                                    }}>
+                                    }}
+                                >
                                     Assign Existing
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                     onClick={() => {
-                                        setFormError({...formError, author: false});
+                                        setFormError({
+                                            ...formError,
+                                            author: false,
+                                        });
                                         setAuthorMode("Add New");
-                                    }}>
+                                    }}
+                                >
                                     Add New
                                 </Dropdown.Item>
                             </DropdownButton>
@@ -224,14 +238,14 @@ export default function BookModal(props) {
                                             fullWidth
                                             variant="outlined"
                                             value={book.author?.firstName}
-                                            onChange={e => {
+                                            onChange={(e) => {
                                                 setBook({
                                                     ...book,
                                                     author: {
                                                         ...book.author,
                                                         firstName:
-                                                            e.target.value
-                                                    }
+                                                            e.target.value,
+                                                    },
                                                 });
                                             }}
                                             error={Boolean(
@@ -253,13 +267,14 @@ export default function BookModal(props) {
                                             fullWidth
                                             variant="outlined"
                                             value={book.author?.lastName}
-                                            onChange={e => {
+                                            onChange={(e) => {
                                                 setBook({
                                                     ...book,
                                                     author: {
                                                         ...book.author,
-                                                        lastName: e.target.value
-                                                    }
+                                                        lastName:
+                                                            e.target.value,
+                                                    },
                                                 });
                                             }}
                                             error={Boolean(
@@ -283,23 +298,21 @@ export default function BookModal(props) {
                                         options={authors}
                                         error={Boolean(formError.author)}
                                         helperText={formError.author}
-                                        onChange={e => {
-                                             
+                                        onChange={(e) => {
                                             const names = e.target.innerHTML.split(
                                                 ","
                                             );
                                             const firstName = names[1];
                                             const lastName = names[0];
                                             const author = authors.find(
-                                                v =>
+                                                (v) =>
                                                     v.lastName === lastName &&
                                                     v.firstName === firstName
                                             );
-                                             
 
                                             setBook({
                                                 ...book,
-                                                author: author?._id
+                                                author: author?._id,
                                             });
                                         }}
                                     />

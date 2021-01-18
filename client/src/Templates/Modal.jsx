@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
 import Spinner from "../Spinner";
 import Error from "../Components/Error";
@@ -9,24 +9,23 @@ import config from "../config.json";
  * @param error : indicates there are some backend errors.
  * @param handleClose : function handling close action.
  * @param title : title of modal.
- * @param content : components of modal content to be displayed. 
- * @param handleSubmit : function handling submit action. 
+ * @param content : components of modal content to be displayed.
+ * @param handleSubmit : function handling submit action.
  * @param loading :  indicates form is currently being submitted to backend.
- * @return a modal layout. 
+ * @return a modal layout.
  */
-export default function ModalTemplate({ 
+export default function ModalTemplate({
     success,
-    error,  
+    error,
     handleClose,
     title,
     content,
     handleSubmit,
-    loading
-}) {  
-
+    loading,
+}) {
     return (
         <>
-            <Modal show={true} onHide={handleClose}  >
+            <Modal show={true} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title> {title} </Modal.Title>
                 </Modal.Header>
@@ -34,13 +33,15 @@ export default function ModalTemplate({
                     {success && ( //success state.
                         <Alert variant={"info"}>{config.message.success}</Alert>
                     )}
-                    {error //error state
-                     && <Error /> }
+                    {error && <Error /> //error state
+                    }
 
-                    {loading //loading state
-                     ? <Spinner /> 
-                     : //normal state
-                     content}
+                    {loading ? ( //loading state
+                        <Spinner />
+                    ) : (
+                        //normal state
+                        content
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
