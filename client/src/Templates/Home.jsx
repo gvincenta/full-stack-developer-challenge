@@ -49,7 +49,7 @@ export default function HomeTemplate({
                 setLoading(false);
                 setError(true);
             });
-    }, []);
+    }, [fetch, sortData]);
 
     return (
         <>
