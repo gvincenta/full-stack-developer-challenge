@@ -9,10 +9,13 @@ module.exports = {
         var author = new Author({
             firstName, lastName
         });
-        author.save();
-    
-        //return OK with the new author's details.
-        res.status(200).json(author);
+        author.save().then((response) => {
+            //return OK with the new author's details.
+            res.status(200).json(response);
+        }).catch(e => {
+            res.status(500).json(e);
+
+        });
     },
     getAuthorByID : (req, res) => { 
         const {id} = req.query;

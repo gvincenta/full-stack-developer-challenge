@@ -82,9 +82,7 @@ There are 2 use cases that could fit for this section:
 To respond to these 2 use cases, there are 2 kinds of Cards used to display each individual book: 
 - A flippable card with an (stock) image - which is more interactive and appealing to client / customer. A carousel has also been added showing: Best Seller, New Releases and Most Popular books to make the homepage more appealing to client/customer to view.  
 - A card with a link to modal / pop up window (with no images) - which is more informative, but less appealing to client / customer. However, this is more suitable for the admins in the warehouses use case. 
-
-Additional sections:
-- Carousel showing: New Releases, Most Popular, and Best Seller. 
+ 
 
 ## Author
 This section is used for: 
@@ -99,17 +97,16 @@ This section is used for:
 ## Book
 Since a Book requires an Author, so, there are 2 sections in a Book's modal: 
 - Book : Name, ISBN
-- Author : First Name, Last Name
+- Author : First Name, Last Name.
 Upon adding a book, user can assign an existing author to this book, or add a new author too. 
 ## Author
 Author's form contains First Name and Last Name. 
 ## Validation
 For simplicity, form is validated only after hitting 'Add' button. 
-
-# Possible improvements
-- use of redux / xstate when the scale of the app grows significantly bigger. This will avoid the need to pass down loading/success/error states too.
-- we can see repeating patterns of handling loading and error states in templates and useEffect(), which could possibly be refactored with redux / xstate. 
-- if we decide to go with the flippable card, a more efficient way to fetch all books with their author details would be required, especially if we are dealing with 100s of books. 
-- when dealing with large amount of data, virtualisations would be required and a table view might be more preferable. react-table[https://github.com/tannerlinsley/react-table] is a good package to handle this. 
 # Github Branches
 To avoid confusions with other candidates' responses, each branch I have worked onis prefixed with 'gilbert-'. 
+# Possible improvements
+- use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/) when the scale of the app grows significantly bigger. This will avoid the need to pass down loading/success/error states too.
+- we can see repeating patterns of handling loading and error states in templates and useEffect(), which could possibly be refactored with redux / xstate. 
+- if we decide to go with the flippable card, a more efficient way to fetch all books with their author details would be required, especially if we are dealing with 100s of books. 
+- when dealing with large amount of data, virtualisations would be required and a table view might be more preferable. [react-table](https://github.com/tannerlinsley/react-table) and [react-virtualized](https://github.com/bvaughn/react-virtualized) are good packages to handle this. 
