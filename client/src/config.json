@@ -1,7 +1,14 @@
 {
-    "loading": 1500,
+    "loading": 1500,  
     "message": {
         "noData": "No data currently available.",
         "success": "Your response has been recorded. You may now close this window."
+    },
+    "styles": {
+        "colors" : {
+            "primary": "#AB7742",
+            "secondary" : "#6C757D"
+        },
+        "borderRadius":20
     }
 }

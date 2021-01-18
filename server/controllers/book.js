@@ -11,29 +11,34 @@ module.exports = {
             name, 
             author
         });
-        book.save();
+        book.save().then((response) => {
+            //return OK with the new book's details.
+            res.status(200).json(response);
+        }).catch(e => {
+            res.status(500).json(e);
+
+        });
     
-        //return OK with the new book's details.
-        res.status(200).json(book);
+       
     },
     getBookByID : async (req, res) => { 
         const {id} = req.query;
         if (id ) { 
         //find the book
-        const book =  await Book.findById(id) 
-        //nest author details
-        const bookAuthor = await book.populate('author').execPopulate() 
-        //return book + author details
-        Promise.all([ bookAuthor])
-        .then(doc => {
-            return   res.status(200).json(doc[0]);
-        })
-        .catch(e => {
-            res.status(500).json(err);
+        Book.findById(id).then(response => 
+                //nest author details
+                response.populate('author').execPopulate()
+                .then( response2 =>
+                    //return book + author details
+                    res.status(200).json(response2)) 
 
-        }) 
-        }
+                .catch( error2 => res.status(500).json(error2) )  
+            )
+            .catch( e => res.status(500).json(e) )
         
+       
+       
+        }
     },
     getAllBooks : (req, res) => {  
         Book.find({})

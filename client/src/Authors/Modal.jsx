@@ -6,8 +6,11 @@ import { TextField } from "@material-ui/core";
 import config from "../config.json";
 /**
  *  Author modal logic.
+ * @param add: whether modal is for adding new author or just displaying author's details.
+ * @param id : id of the author to be fetched from backend. 
+ * @return a modal to display an author's details / a form to add new author. 
  */
-export default function(props) {
+export default function AuthorModal(props) {
     const { id, add } = props;
     const [author, setAuthor] = useState([]);
     const [loading, setLoading] = useState(false);

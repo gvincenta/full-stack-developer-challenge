@@ -1,15 +1,67 @@
-# Full-stack web developer challenge
+# How To Run 
+## On Local Device
+1. Clone this project. 
+2. Make sure you have the following installed in your local device: 
+    - MongoDB 
+    - NPM 
+    - ExpressJS
+    - NodeJS
+    - ReactJS 
+3. Open terminal and `cd` to the root of this project directory. 
+4. Run `yarn` or `npm install`.
+5. `cd` to [/client](client).
+6. Run `yarn` or `npm install`.
+7. `cd` to the root of this project directory. 
+8. Run `yarn run start-dev` or `npm run start-dev`. 
 
-In this test, you are expected to write a small web application to manage a list of Books. Each book has a name, ISBN, and an author. The test consists of two parts, a RESTful API as the **backend** and the Javascript based **frontend** application
+Please Note:
+- This project was developed with yarn as the package manager, so using yarn is preferred. 
+- Backend is hosted at http://localhost:5000/
+- Frontend is hosted at http://localhost:3000/
 
-## Backend implementation
+# Project Stack
+- Backend: ExpressJS and NodeJS.
+- Database : MongoDB with Mongoose. 
+- Frontend : ReactJS with React-Bootstrap and Material UI. 
+### Changing target Database URL and Backend Target Port :
+- For Database URL:
+    - Go to [db.js](server/models/db.js) - Line 12. change `process.env.MONGO_URL || "mongodb://localhost/test"` with your desired MongoDB Database URL.
+- For Backend Port: 
+    - Go to [www](server/bin/www) - Line 15. change `process.env.PORT || '5000'` with your desired port number. 
+    - Go to [/client/package.json](client/package.json) - Line 44. change `5000` with your desired port number.
+# Project Structure
+All backend-related files are in [/server](server), while all frontend related files are in [/client](client). 
+## Backend
+Using MVC Architecture (with ReactJS handling all its views), 
+- Models are in [/models](server/models).
+    - DB Connection is established in [db.js](server/models/db.js). 
+- Controllers are in [/controllers](server/controllers).
+- API routing are in [/routes](server/routes).
+- Please ignore the [/views](server/views) and  [/public](server/public) directory.
+## Frontend
+All components are in [/src](client/src). 
+- [/Books](client/src/Books) - has all the components for showing book details and homepage. 
+- [/Authors](client/src/Authors) - has all the components for showing author details and homepage. 
+- [/Templates](client/src/Templates) - is responsible for the general layout of homepage, modal, flippable card, and card. 
+- [/Components](client/src/Components) - contains all the reusable components, e.g. 404 - Page Not Found Alerts. 
+- [App.jsx](client/src/App.jsx) - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
 
-Use the following structure to model the data
+# Backend 
+## Endpoints
 
+* **GET /books/** - Returns a list of books in the database in JSON format
+* **GET /book/{{id}}/** - Returns a detail view of the specified book id. Nest author details in JSON format
+* **GET /authors/** - Returns a list of authors in the database in JSON format
+* **GET /author/{{id}}/** - Returns a detail view of the specified author id
+* **POST /author/** - Creates a new author with the specified details - Expects a JSON body
+* **POST /book/** - Creates a new book with the specified details - Expects a JSON body
+
+(As dictated from the challenge.)
+## Database Structure
 ```
 class Author(Model):
-    first_name = models.TextField()
-    last_name = models.TextField()
+    firstName = models.TextField()
+    lastName = models.TextField()
 ```
 
 ```
@@ -19,34 +71,71 @@ class Book(Model):
     author = models.ForeignKey(Author)
 ```
 
-Implement the following API endpoints:
+(As dictated from the challenge.)
+Please note:
+- It is assumed that all fields are required.
+- In this project, all variables, functions, etc. use camelCase convention. 
+# Frontend Routing 
+Follows similar patterns to backend's endpoints : 
+- `/authors` and `/books` for showing all authors and books respectively
+- `/author/{{id}}/` and `/book/{{id}}/` to show individual author and book respectively (with popup window).
+- `/books` is used as entry point of the web-app. So, `/` redirects to `/books`.
+- All other routes will be responded with `404 - Page Not Found`. 
 
-* **GET /books/** - Returns a list of books in the database in JSON format
-* **GET /book/{{id}}/** - Returns a detail view of the specified book id. Nest author details in JSON format
-* **GET /authors/** - Returns a list of authors in the database in JSON format
-* **GET /author/{{id}}/** - Returns a detail view of the specified author id
-* **POST /author/** - Creates a new author with the specified details - Expects a JSON body
-* **POST /book/** - Creates a new book with the specified details - Expects a JSON body
+# Design Rationale
+Both Book and Author sections have: 
+- A search bar - for filtering.
+- Total count.
+- A grid with card layout.
+- Add button.
+- A modal.  
+## Book
+This section is used for: 
+- Showing all books that exist in the database. 
+- Adding a new book.
 
-_Optional_: You can go a step further by implementing API endpoints to update existing records if you like.
+There are 2 use cases that could fit for this section: 
+- A client / customer viewing a library / digital bookstore - which requires a more appealing homepage.
+- An informative list of all the books available in the warehouse for admins. 
 
-eg:
-* **PUT /author/{{id}}** - Updates an existing author - Expects a JSON body
-* **PUT /book/{{id}}** - Updates an existing book - Expects a JSON body
+To respond to these 2 use cases, there are 2 kinds of Cards used to display each individual book: 
+- A flippable card with an (stock) image - which is more interactive and appealing to client / customer. A carousel has also been added showing: Best Seller, New Releases and Most Popular books to make the homepage more appealing to client/customer to view.  
+- A card with a link to modal / pop up window (with no images) - which is more informative, but less appealing to client / customer. However, this is more suitable for the admins in the warehouses use case. 
+ 
 
-You are recommended to use **Python/Django** along with [**Django REST Framework**](http://www.django-rest-framework.org/) to implement your backend and API layer, but you are free to use a different language/framework/libraries you are comfortable with.
+## Author
+This section is used for: 
+- Showing all authors that exist in the database. 
+- Adding a new author. 
 
+# Modal / Pop Up Window, Form Design and Validations
+- Upon clicking an add button, a modal / pop up window shows. (Please note that the term "pop up window" and "modal" are used interchangeably in this project.)
+- A form is shown using a modal. 
+- All fields are required. A simple validation has been applied to check this. 
+- After submitting a form, there will be an alert showing whether the form has been successfully submitted or not. The modal is not automatically closed so that user doesn't has to reopen the modal again when they want to add multiple authors / books. 
+## Book
+Since a Book requires an Author, so, there are 2 sections in a Book's modal: 
+- Book : Name, ISBN
+- Author : First Name, Last Name.
+Upon adding a book, user can assign an existing author to this book, or add a new author too. 
+## Author
+Author's form contains First Name and Last Name. 
+## Validation
+For simplicity, form is validated only after hitting 'Add' button. 
+# Github Branches
+To avoid confusions with other candidates' responses, each branch I have worked on is prefixed with 'gilbert-'. 
+# Possible Improvements / Extensions
+- Use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/)
+    - Necessary when the scale of the app grows significantly bigger. 
+    - This will avoid the need to pass down loading/success/error states too.
+    - we can see repeating patterns of handling loading and error states in `/Templates` and `useEffect()`, which could possibly be refactored with this.  
+- When dealing with large amount of data,
+    - virtualisations would be required 
+    - a table view might be more preferable. 
+    - [react-table](https://github.com/tannerlinsley/react-table) and [react-virtualized](https://github.com/bvaughn/react-virtualized) are good packages to handle this. 
+    - If we decided to use the flippable card, a more efficient way to fetch all books with their author details would be required.
+- For building an e-commerce app, e.g. a bookstore, [NextJS](https://nextjs.org/) is more suitable as the frontend framework. 
+- For backend, [NestJS](https://nestjs.com/) could be used as it has more structure than ExpressJS.
 
-## Frontend implementation
-
-Implement a small frontend application to consume the API you developed above.
-
-The frontend should be able to show a list of names of the books available in the database. Upon clicking the name of a book on the list, the user should be navigated to a more detailed view of the selected book, where they are presented with the ISBN and the author details. You should also implement two forms where the user is able to create/update authors and books (using the POST and PUT endpoints)
-You are recommended to use **ReactJS** to create the frontend, but you are free to use a different Javascript framework.
-
-### Notes and recommendations
-
-* The languages, frameworks and libraries mentioned are recommendations only, you are free to use whatever you are comfortable with.
-* The project structure is up to you to decide
-* You are recommended to use git commits in a logical manner to demonstrate the development progress
-* Writing tests and adhering to development standards/conventions will let you gain extra points :)
+# Content Disclaimer
+I do not own any of the images in [/client/src/images/](client/src/images/). They are taken from [designforwriters.com](https://www.designforwriters.com/book-cover-design/).

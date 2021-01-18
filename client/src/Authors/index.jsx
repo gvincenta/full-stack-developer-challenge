@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import Home from "../Templates/Home";
 import Modal from "./Modal";
 import Author from "./Author";
 /**
  * Author homepage.
  */
-export default function(props) {
+export default function AuthorHome() {
     return (
         <>
             <Home

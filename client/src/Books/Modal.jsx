@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Form, Col, Row, Dropdown, DropdownButton } from "react-bootstrap";
 import axios from "axios";
 import { TextField } from "@material-ui/core";
-import Autocomplete from "../Autocomplete";
-import Modal from "../Templates/Modal";
-import Book from "./Book";
-import FlipCard from "./FlipCard";
+import Autocomplete from "../Components/Autocomplete";
+import Modal from "../Templates/Modal"; 
 import config from "../config.json";
 /**
- *  Book modal details.
+ *  Book modal (with form) details.
+ * @param add: whether modal is for adding new book or just displaying book details,
+ * @param id : id of the book to be fetched from backend. 
+ * @return a modal to display a book's (and its author) details / a form to add new book (with existing or new authors). 
  */
-export default function(props) {
+export default function BookModal(props) {
     const { id, add } = props;
     const [book, setBook] = useState({});
     const [authors, setAuthors] = useState([]);
@@ -22,6 +23,8 @@ export default function(props) {
     const [authorMode, setAuthorMode] = useState("Assign Existing");
     const validate = () => {
         //validate book and author details.
+        //book must have an isbn and a name.
+        //book must be assigned to existing author, or with new author.
         console.log("CHECKING..", { book });
 
         const newState = {
@@ -184,12 +187,14 @@ export default function(props) {
                                 size="sm">
                                 <Dropdown.Item
                                     onClick={() => {
+                                        setFormError({...formError, author: false});
                                         setAuthorMode("Assign Existing");
                                     }}>
                                     Assign Existing
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                     onClick={() => {
+                                        setFormError({...formError, author: false});
                                         setAuthorMode("Add New");
                                     }}>
                                     Add New

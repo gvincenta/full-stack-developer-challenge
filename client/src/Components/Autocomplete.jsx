@@ -1,7 +1,15 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-export default function Asynchronous({ options, onChange, error, helperText }) {
+/**
+ * Autocomplete component for assigning existing authors.
+ * @param options : the options to be chosen from.
+ * @param onChange:  function to handle onChange event.
+ * @param error : indicates there are input errors. 
+ * @param helperText : helper / error text to be displayed. 
+ * @return MUI's Autocomplete component customised for assigning existing authors.
+ */
+export default function AutocompleteComponent({ options, onChange, error, helperText }) {
     const [open, setOpen] = React.useState(false);
 
     return (

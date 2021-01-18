@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
-import { RouteComponentProps } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"; 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Navbar from "./Navbar";
+import Navbar from "./Components/Navbar";
 import Books from "./Books";
 import Authors from "./Authors";
-import NotFound from "./NotFound";
+import NotFound from "./Components/NotFound";
 import "./App.css";
+import config from './config.json';
 /**
  * entry point of the web-app.
  */
@@ -22,10 +22,13 @@ function App() {
                         textTransform: "none"
                     }
                 },
-                palette: {
+                palette: { //using dark theme pallete to match UI color schemes.
                     type: "dark",
                     primary: {
-                        main: "#AB7742"
+                        main:   config.styles.colors.primary
+                    },
+                    secondary:{
+                        main:   config.styles.colors.secondary
                     }
                 }
             }),
@@ -36,12 +39,12 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Navbar />
-            <BrowserRouter>
+             <BrowserRouter>
                 <Switch>
                     <Route exact path="/books">
                         <Books />
                     </Route>
-                    <Route exact path="/">
+                    <Route exact path="/"> 
                         <Redirect to="/books" />
                     </Route>
 
@@ -54,10 +57,11 @@ function App() {
                     <Route path="/author/:id">
                         <Authors />
                     </Route>
+                    {/* other than the above, return 404. */}
                     <Route path="*" component={NotFound} />
                 </Switch>
             </BrowserRouter>
-        </ThemeProvider>
+         </ThemeProvider>
     );
 }
 

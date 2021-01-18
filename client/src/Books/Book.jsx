@@ -1,10 +1,13 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "../Templates/Modal";
 /**
  * Book card detail with its name.
+ * @param name: name of the book to be displayed.
+ * @param _id : id of the book to be navigated to.
+ * @return A Card component linking to /book/:id to show more details.
  */
-export default function({ name, isbn, _id: id }) {
+export default function Book({ name, _id: id }) {
     return (
         <Card className="card-item">
             <Card.Body>
