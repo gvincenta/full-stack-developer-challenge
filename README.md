@@ -95,8 +95,8 @@ This section is used for:
 - Adding a new book.
 
 There are 2 use cases that could fit for this section: 
-    - A client / customer viewing a library / digital bookstore - which requires a more appealing homepage.
-    - An informative list of all the books available in the warehouse for admins. 
+- A client / customer viewing a library / digital bookstore - which requires a more appealing homepage.
+- An informative list of all the books available in the warehouse for admins. 
 
 To respond to these 2 use cases, there are 2 kinds of Cards used to display each individual book: 
 - A flippable card with an (stock) image - which is more interactive and appealing to client / customer. A carousel has also been added showing: Best Seller, New Releases and Most Popular books to make the homepage more appealing to client/customer to view.  
