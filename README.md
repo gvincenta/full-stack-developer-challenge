@@ -1,16 +1,23 @@
-# How to run 
-1. clone this project. 
-2. Make sure you have the following installed : MongoDB, NPM, ExpressJS, NodeJS, ReactJS. 
-3. cd to the root of this project directory. 
-4. run yarn or npm install.
-5. cd to /client.
-6. run yarn or npm install.
-7. cd to the root of this project directory. 
-8. run yarn run start-dev or npm run start-dev. 
+# How To Run 
+## On Local Device
+1. Clone this project. 
+2. Make sure you have the following installed in your local device: 
+    - MongoDB 
+    - NPM 
+    - ExpressJS
+    - NodeJS
+    - ReactJS 
+3. Open terminal and `cd` to the root of this project directory. 
+4. Run `yarn` or `npm install`.
+5. `cd` to `/client`.
+6. Run `yarn` or `npm install`.
+7. `cd` to the root of this project directory. 
+8. Run `yarn run start-dev` or `npm run start-dev`. 
 
 Please Note:
 - This project was developed with yarn as the package manager, so using yarn is preferred. 
-- backend is hosted at port 5000, frontend is hosted at port 3000.
+- Backend is hosted at http://localhost:5000/
+- Frontend is hosted at http://localhost:3000/
 
 # Project Stack
 - Backend: ExpressJS and NodeJS.
@@ -18,17 +25,19 @@ Please Note:
 - Frontend : ReactJS with React-Bootstrap and Material UI. 
 
 # Project Structure
-All backend-related files are in /server, while all frontend related files are in /client. 
+All backend-related files are in `/server`, while all frontend related files are in `/client`. 
 # Backend
 Using MVC Architecture (with ReactJS handling all its views), 
-- Models are in /models folder.
-- Controllers are in /controllers folder.
+- Models are in `/models`.
+- Controllers are in `/controllers`.
+- Please ignore the `/views` directory.
 # Frontend
-All components are in /src folder. 
-- /Books folder - has all the components for showing book details and homepage. 
-- /Authors folder - has all the components for showing author details and homepage. 
-- /Templates folder - is responsible for the general layout of homepage, modal, flippable card, and card. 
-- App.jsx - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
+All components are in `/src`. 
+- `/Books` - has all the components for showing book details and homepage. 
+- `/Authors` - has all the components for showing author details and homepage. 
+- `/Templates` - is responsible for the general layout of homepage, modal, flippable card, and card. 
+- `Components` - contains all the reusable components, e.g. 404 - Page Not Found Alerts. 
+- `App.jsx` - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
 
 # Backend 
 ## Endpoints
@@ -55,21 +64,21 @@ class Book(Model):
 ```
 (As dictated from the challenge.)
 Please note:
-- it is assumed that all fields are required.
-- in this project, all variables, functions etc. use camelCase convention. 
+- It is assumed that all fields are required.
+- In this project, all variables, functions, etc. use camelCase convention. 
 # Frontend Routing 
 Follows similar patterns to backend's endpoints : 
-- '/authors' and '/books' for showing all authors and books respectively
-- '/author/{{id}}/' and '/book/{{id}}/' to show individual author and book respectively (with popup window)
-- '/books' is used as entry point of the web-app. So, '/' redirects to '/books'.
-- all other routes will be responded with 404 - Page Not Found. 
+- `/authors` and `/books` for showing all authors and books respectively
+- `/author/{{id}}/` and `/book/{{id}}/` to show individual author and book respectively (with popup window)
+- `/books` is used as entry point of the web-app. So, `/` redirects to `/books`.
+- All other routes will be responded with `404 - Page Not Found`. 
 
 # Design Rationale
 Both Book and Author sections have: 
 - A search bar - for filtering.
-- Total count
-- A grid with card layout
-- Add button
+- Total count.
+- A grid with card layout.
+- Add button.
 - A modal.  
 ## Book
 This section is used for: 
@@ -105,8 +114,18 @@ Author's form contains First Name and Last Name.
 For simplicity, form is validated only after hitting 'Add' button. 
 # Github Branches
 To avoid confusions with other candidates' responses, each branch I have worked onis prefixed with 'gilbert-'. 
-# Possible improvements
-- use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/) when the scale of the app grows significantly bigger. This will avoid the need to pass down loading/success/error states too.
-- we can see repeating patterns of handling loading and error states in templates and useEffect(), which could possibly be refactored with redux / xstate. 
-- if we decide to go with the flippable card, a more efficient way to fetch all books with their author details would be required, especially if we are dealing with 100s of books. 
-- when dealing with large amount of data, virtualisations would be required and a table view might be more preferable. [react-table](https://github.com/tannerlinsley/react-table) and [react-virtualized](https://github.com/bvaughn/react-virtualized) are good packages to handle this. 
+# Possible Improvements / Extensions
+- use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/)
+    - Necessary when the scale of the app grows significantly bigger. 
+    - This will avoid the need to pass down loading/success/error states too.
+    - we can see repeating patterns of handling loading and error states in `/Templates` and `useEffect()`, which could possibly be refactored with this.  
+- when dealing with large amount of data,
+    - virtualisations would be required 
+    - a table view might be more preferable. 
+    - [react-table](https://github.com/tannerlinsley/react-table) and [react-virtualized](https://github.com/bvaughn/react-virtualized) are good packages to handle this. 
+    - If we decided to use the flippable card, a more efficient way to fetch all books with their author details would be required.
+- For building an e-commerce app, e.g. a bookstore, [NextJS](https://nextjs.org/) is more suitable as the frontend framework. 
+- For backend, [NestJS](https://nestjs.com/) could be used as it has more structure than ExpressJS.
+
+# Content Disclaimer
+I do not own any of the images in `/client/src/images/`. They are taken from [designforwriters.com](https://www.designforwriters.com/book-cover-design/).
