@@ -3,10 +3,10 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Navbar from "./Navbar";
+import Navbar from "./Components/Navbar";
 import Books from "./Books";
 import Authors from "./Authors";
-import NotFound from "./NotFound";
+import NotFound from "./Components/NotFound";
 import "./App.css";
 import config from './config.json';
 /**

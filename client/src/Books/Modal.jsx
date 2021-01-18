@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Col, Row, Dropdown, DropdownButton } from "react-bootstrap";
 import axios from "axios";
 import { TextField } from "@material-ui/core";
-import Autocomplete from "../Autocomplete";
+import Autocomplete from "../Components/Autocomplete";
 import Modal from "../Templates/Modal"; 
 import config from "../config.json";
 /**

@@ -1,7 +1,7 @@
 import React from "react";
 import "./FlipCard.css";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import Error from "../Components/Error";
 import config from "../config.json";
 /**
  * Flip card layout.

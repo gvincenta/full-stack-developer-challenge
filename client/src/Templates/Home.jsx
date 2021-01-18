@@ -5,8 +5,8 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import { useParams } from "react-router-dom";
 import Spinner from "../Spinner";
-import Error from "../Error";
-import NoData from "../NoData";
+import Error from "../Components/Error";
+import NoData from "../Components/NoData";
 /**
  * Homepage layout.
  * @param Modal : Modal component to be displayed.

@@ -4,7 +4,7 @@ import axios from "axios";
 
 import image from "../images/BookCover1.jpg";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import Error from "../Components/Error";
 import config from "../config.json";
 /**
  * Book carousel showing: Best Seller, Most Popular, and New Releases.

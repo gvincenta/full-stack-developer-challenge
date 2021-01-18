@@ -1,7 +1,7 @@
 import React  from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import Error from "../Components/Error";
 import config from "../config.json";
 /**
  * Modal layout.
