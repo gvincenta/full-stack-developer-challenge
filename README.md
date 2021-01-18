@@ -55,6 +55,7 @@ All components are in [/src](client/src).
 * **GET /author/{{id}}/** - Returns a detail view of the specified author id
 * **POST /author/** - Creates a new author with the specified details - Expects a JSON body
 * **POST /book/** - Creates a new book with the specified details - Expects a JSON body
+
 (As dictated from the challenge.)
 ## Database Structure
 ```
@@ -69,6 +70,7 @@ class Book(Model):
     isbn = models.TextField()
     author = models.ForeignKey(Author)
 ```
+
 (As dictated from the challenge.)
 Please note:
 - It is assumed that all fields are required.
@@ -76,7 +78,7 @@ Please note:
 # Frontend Routing 
 Follows similar patterns to backend's endpoints : 
 - `/authors` and `/books` for showing all authors and books respectively
-- `/author/{{id}}/` and `/book/{{id}}/` to show individual author and book respectively (with popup window)
+- `/author/{{id}}/` and `/book/{{id}}/` to show individual author and book respectively (with popup window).
 - `/books` is used as entry point of the web-app. So, `/` redirects to `/books`.
 - All other routes will be responded with `404 - Page Not Found`. 
 
@@ -91,9 +93,10 @@ Both Book and Author sections have:
 This section is used for: 
 - Showing all books that exist in the database. 
 - Adding a new book.
+
 There are 2 use cases that could fit for this section: 
-- A client / customer viewing a library / digital bookstore - which requires a more appealing homepage.
-- An informative list of all the books available in the warehouse for admins. 
+    - A client / customer viewing a library / digital bookstore - which requires a more appealing homepage.
+    - An informative list of all the books available in the warehouse for admins. 
 
 To respond to these 2 use cases, there are 2 kinds of Cards used to display each individual book: 
 - A flippable card with an (stock) image - which is more interactive and appealing to client / customer. A carousel has also been added showing: Best Seller, New Releases and Most Popular books to make the homepage more appealing to client/customer to view.  
@@ -120,7 +123,7 @@ Author's form contains First Name and Last Name.
 ## Validation
 For simplicity, form is validated only after hitting 'Add' button. 
 # Github Branches
-To avoid confusions with other candidates' responses, each branch I have worked onis prefixed with 'gilbert-'. 
+To avoid confusions with other candidates' responses, each branch I have worked on is prefixed with 'gilbert-'. 
 # Possible Improvements / Extensions
 - use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/)
     - Necessary when the scale of the app grows significantly bigger. 
