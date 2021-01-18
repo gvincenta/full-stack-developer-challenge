@@ -33,19 +33,16 @@ export default function HomeTemplate({
  
     const { id } = useParams();
     const [search, setSearch] = useState(""); 
-
-    console.log("ID ARE", id);
+ 
 
     useEffect(() => {
         axios
             .get(fetch)
-            .then(res => {
-                console.log("axios get all data ", res);
+            .then(res => { 
                 setData(sortData ? sortData(res.data || []) : res.data || []);
                 setLoading(false);
             })
-            .catch(e => {
-                console.log("axios error", e);
+            .catch(e => { 
                 setLoading(false);
                 setError(true);
             });
@@ -70,8 +67,7 @@ export default function HomeTemplate({
                         ? 'Showing ' + data.length + ' results' 
                         : 'Showing ' + searchFunction(data, search).length   + ' results'}
                     value={search}
-                    onChange={e => {
-                        console.log("e.target", e.target.value, search);
+                    onChange={e => { 
 
                         setSearch(e.target.value); 
                     }}

@@ -25,8 +25,7 @@ export default function BookFlipCard({ name, isbn, _id: id }) {
                     setLoading(false);
                     setBook(res.data);
                 })
-                .catch(e => {
-                    console.log("axios error", e);
+                .catch(e => { 
                     setLoading(false);
                     setError(true);
                 });

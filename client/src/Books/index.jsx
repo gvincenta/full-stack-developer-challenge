@@ -9,14 +9,12 @@ import FlipCard from "./FlipCard";
 
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+/**
+ * Book homepage. 
+ */
 export default function BookHome(props) { 
-    const [withPopUp, setWithPopUp] = useState(true);
-
-    console.log("PROPS ARE", props);
-
-    const { id, template } = useParams();
-    console.log("template", template);
-    console.log("ID ARE", id);
+    const [withPopUp, setWithPopUp] = useState(true); 
+    const { id, template } = useParams(); 
 
     return (
         <>

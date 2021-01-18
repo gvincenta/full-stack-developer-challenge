@@ -17,15 +17,13 @@ export default function BookCarousel() {
     useEffect(() => {
         axios
             .get("/books")
-            .then(res => {
-                console.log("AXIOS get all data ", res);
+            .then(res => { 
                 /*takes in up to first 3 books returned from backend.*/
                 const maxHighlight = Math.min(3, res.data.length); //allow up to 3 books on carousel.
                 setData(res.data.slice(0, maxHighlight));
                 setLoading(false);
             })
-            .catch(e => {
-                console.log("axios error", e);
+            .catch(e => { 
                 setError(true);
                 setLoading(false);
             });

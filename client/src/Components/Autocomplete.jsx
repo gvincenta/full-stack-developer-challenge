@@ -24,8 +24,7 @@ export default function AutocompleteComponent({ options, onChange, error, helper
             onClose={() => {
                 setOpen(false);
             }}
-            getOptionSelected={(option, value) => {
-                // console.log('GET OPT SELECTED', option, value )
+            getOptionSelected={(option, value) => { 
                 return option._id === value?._id;
             }}
             getOptionLabel={option => option.lastName + "," + option.firstName}

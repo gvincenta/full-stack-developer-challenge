@@ -15,7 +15,7 @@ export default function BookModal(props) {
     const { id, add } = props;
     const [book, setBook] = useState({});
     const [authors, setAuthors] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
 
@@ -24,8 +24,7 @@ export default function BookModal(props) {
     const validate = () => {
         //validate book and author details.
         //book must have an isbn and a name.
-        //book must be assigned to existing author, or with new author.
-        console.log("CHECKING..", { book });
+        //book must be assigned to existing author, or with new author. 
 
         const newState = {
             name: (!book.name || book.name?.length < 1) && "Name is required.",
@@ -53,8 +52,7 @@ export default function BookModal(props) {
             (authorMode === "Assign Existing" && newState.author) ||
             (authorMode === "Add New" &&
                 (newState.author?.firstName || newState.author?.lastName))
-        ) {
-            console.log("NEW STATE ERORR", newState);
+        ) { 
             return false;
         }
         return true;
@@ -70,33 +68,46 @@ export default function BookModal(props) {
             //there is an error.
             setLoading(false);
             return;
-        }
-        console.log("form error", { formError });
-        var createAuthorResponse = null;
+        } 
 
         /* for assigning existing authors, book has {author: authorID}
         for adding new author, book has {author: {firstName, lastName}}  */
-
-        var author = book.author;
+ 
 
         if (authorMode === "Add New") {
-            createAuthorResponse = await axios.post("author", book.author);
-            console.log("CREATE AUTHOR", createAuthorResponse.data);
-            author = createAuthorResponse.data._id;
-        }
-
-        console.log("SUBMITTING THIS DATA", { ...book, author });
+            axios.post("author", book.author).then( createAuthorResponse => {
+               axios
+           .post( "/book", { ...book, author:  createAuthorResponse.data._id })
+           .then(res => { 
+               setTimeout(() => {
+                   setLoading(false);
+                   setSuccess(true);
+               }, config.loading);
+           })
+           .catch(e => { 
+               setTimeout(() => {
+                   setLoading(false);
+                   setError(true);
+               }, config.loading);
+           }); 
+           }).catch( error2 => { 
+               setTimeout(() => {
+                   setLoading(false);
+                   setError(true);
+               }, config.loading);
+           })
+           return;  
+       }
+ 
         axios
-            .post("/book", { ...book, author })
-            .then(res => {
-                console.log("SUBMITTED", res);
+            .post("/book",  book )
+            .then(res => { 
                 setTimeout(() => {
                     setLoading(false);
                     setSuccess(true);
                 }, config.loading);
             })
-            .catch(e => {
-                console.log("ERROR", e);
+            .catch(e => { 
                 setTimeout(() => {
                     setLoading(false);
                     setError(true);
@@ -107,12 +118,13 @@ export default function BookModal(props) {
         if (id) {
             axios
                 .get("/book", { params: { id } })
-                .then(res => {
-                    console.log("axios get specific book ", res);
+                .then(res => { 
                     setBook(res.data);
+                    setLoading(false);
                 })
-                .catch(e => {
-                    console.log("axios error", e);
+                .catch(e => { 
+                    setLoading(false);
+                   setError(true);
                 });
         }
     }, [id]);
@@ -120,12 +132,11 @@ export default function BookModal(props) {
         if (!id && authorMode === "Assign Existing") {
             axios
                 .get("/authors")
-                .then(res => {
-                    console.log("axios get all authors ", res);
+                .then(res => { 
                     setAuthors(res.data);
                 })
                 .catch(e => {
-                    console.log("axios error", e);
+                    setError(true);
                 });
         }
     }, [id, authorMode]);
@@ -273,10 +284,7 @@ export default function BookModal(props) {
                                         error={Boolean(formError.author)}
                                         helperText={formError.author}
                                         onChange={e => {
-                                            console.log(
-                                                "autocomplete on change",
-                                                e.target.innerHTML.split(",")
-                                            );
+                                             
                                             const names = e.target.innerHTML.split(
                                                 ","
                                             );
@@ -287,11 +295,7 @@ export default function BookModal(props) {
                                                     v.lastName === lastName &&
                                                     v.firstName === firstName
                                             );
-                                            console.log("found author", author);
-                                            console.log("SET BOOK HERE", {
-                                                ...book,
-                                                author: author?._id
-                                            });
+                                             
 
                                             setBook({
                                                 ...book,
