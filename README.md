@@ -9,7 +9,7 @@
     - ReactJS 
 3. Open terminal and `cd` to the root of this project directory. 
 4. Run `yarn` or `npm install`.
-5. `cd` to `/client`.
+5. `cd` to [/client](client).
 6. Run `yarn` or `npm install`.
 7. `cd` to the root of this project directory. 
 8. Run `yarn run start-dev` or `npm run start-dev`. 
@@ -25,23 +25,26 @@ Please Note:
 - Frontend : ReactJS with React-Bootstrap and Material UI. 
 ### Changing target Database URL and Backend Target Port :
 - For Database URL:
-
+    - Go to [db.js](server/models/db.js) - Line 12. change `process.env.MONGO_URL || "mongodb://localhost/test"` with your desired MongoDB Database URL.
+- For Backend Port: 
+    - Go to [www](server/bin/www) - Line 15. change `process.env.PORT || '5000'` with your desired port number. 
+    - Go to [/client/package.json](client/package.json) - Line 44. change `5000` with your desired port number.
 # Project Structure
 All backend-related files are in [/server](server), while all frontend related files are in [/client](client). 
 ## Backend
 Using MVC Architecture (with ReactJS handling all its views), 
-- Models are in `/models`.
+- Models are in [/models](server/models).
     - DB Connection is established in [db.js](server/models/db.js). 
-- Controllers are in `/controllers`.
-- API routing are in `/routes`.
-- Please ignore the `/views` and `/public` directory.
+- Controllers are in [/controllers](server/controllers).
+- API routing are in [/routes](server/routes).
+- Please ignore the [/views](server/views) and  [/views](server/public) directory.
 ## Frontend
-All components are in `/src`. 
-- `/Books` - has all the components for showing book details and homepage. 
-- `/Authors` - has all the components for showing author details and homepage. 
-- `/Templates` - is responsible for the general layout of homepage, modal, flippable card, and card. 
-- `Components` - contains all the reusable components, e.g. 404 - Page Not Found Alerts. 
-- `App.jsx` - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
+All components are in [/src](client/src). 
+- [/Books](client/Books) - has all the components for showing book details and homepage. 
+- [/Authors](client/Authors) - has all the components for showing author details and homepage. 
+- [/Templates](client/Templates) - is responsible for the general layout of homepage, modal, flippable card, and card. 
+- [/Components](client/Components) - contains all the reusable components, e.g. 404 - Page Not Found Alerts. 
+- [App.jsx](client/App.jsx) - entry point of the web-app, which is also responsible for configuring MUI's dark theme palette and routing.
 
 # Backend 
 ## Endpoints
@@ -132,4 +135,4 @@ To avoid confusions with other candidates' responses, each branch I have worked 
 - For backend, [NestJS](https://nestjs.com/) could be used as it has more structure than ExpressJS.
 
 # Content Disclaimer
-I do not own any of the images in `/client/src/images/`. They are taken from [designforwriters.com](https://www.designforwriters.com/book-cover-design/).
+I do not own any of the images in [/client/src/images/](client/src/images/). They are taken from [designforwriters.com](https://www.designforwriters.com/book-cover-design/).
