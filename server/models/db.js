@@ -4,14 +4,14 @@ const options = {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 };
 
 // connect....
 mongoose.connect(
     process.env.MONGO_URL || "mongodb://localhost/test",
     options,
-    function(err) {
+    function (err) {
         // Check error in initial connection. There is no 2nd param to the callback.
         if (err) {
             console.log("Failed to connect to DB");

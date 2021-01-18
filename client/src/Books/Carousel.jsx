@@ -17,15 +17,13 @@ export default function BookCarousel() {
     useEffect(() => {
         axios
             .get("/books")
-            .then(res => {
-                console.log("AXIOS get all data ", res);
+            .then((res) => {
                 /*takes in up to first 3 books returned from backend.*/
                 const maxHighlight = Math.min(3, res.data.length); //allow up to 3 books on carousel.
                 setData(res.data.slice(0, maxHighlight));
                 setLoading(false);
             })
-            .catch(e => {
-                console.log("axios error", e);
+            .catch((e) => {
                 setError(true);
                 setLoading(false);
             });
@@ -56,10 +54,10 @@ export default function BookCarousel() {
                                             height: "80%",
                                             width: "10%",
                                             padding: "1%",
-                                            marginLeft: "30%"
+                                            marginLeft: "30%",
                                         }}
                                     />
-                                    <h1 style={{ display: "inline" }} >
+                                    <h1 style={{ display: "inline" }}>
                                         {" "}
                                         {idx === 0
                                             ? "Best Seller"
@@ -79,19 +77,22 @@ export default function BookCarousel() {
                                 </div>
                             </Carousel.Item>
                         ))
-                    ) : ( //no data available.
+                    ) : (
+                        //no data available.
                         <Carousel.Item>
                             <div
                                 style={{
                                     height: 250,
                                     width: "100%",
-                                    background: "black"
-                                }}>
+                                    background: "black",
+                                }}
+                            >
                                 <h1
                                     style={{
                                         marginLeft: "30%",
-                                        paddingTop: "5%"
-                                    }}>
+                                        paddingTop: "5%",
+                                    }}
+                                >
                                     {config.message.noData}
                                 </h1>
                             </div>

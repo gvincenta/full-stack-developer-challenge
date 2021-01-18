@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import Home from "../Templates/Home";
 import Modal from "./Modal";
 import Author from "./Author";
@@ -10,7 +10,7 @@ export default function AuthorHome() {
         <>
             <Home
                 fetch="/authors"
-                sortData={data => {
+                sortData={(data) => {
                     //sort by lastName ascending.
                     return data.sort((left, right) => {
                         return left.lastName
@@ -23,7 +23,7 @@ export default function AuthorHome() {
                 search={(data, search) => {
                     //search by firstName OR lastName
                     return data.filter(
-                        v =>
+                        (v) =>
                             v.firstName
                                 .toUpperCase()
                                 .search(search.toUpperCase()) !== -1 ||

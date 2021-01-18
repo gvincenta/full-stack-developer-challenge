@@ -7,19 +7,18 @@ import config from "../config.json";
 /**
  *  Author modal logic.
  * @param add: whether modal is for adding new author or just displaying author's details.
- * @param id : id of the author to be fetched from backend. 
- * @return a modal to display an author's details / a form to add new author. 
+ * @param id : id of the author to be fetched from backend.
+ * @return a modal to display an author's details / a form to add new author.
  */
 export default function AuthorModal(props) {
     const { id, add } = props;
     const [author, setAuthor] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(!add);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
     const [formError, setFormError] = useState({});
     const validate = () => {
         //author modal validation (must have firstName and lastName filled).
-        console.log("CHECKING..", { author });
 
         const newState = {
             firstName:
@@ -27,17 +26,16 @@ export default function AuthorModal(props) {
                 "First Name is required.",
             lastName:
                 (!author.lastName || author.lastName?.length < 1) &&
-                "Last Name is required."
+                "Last Name is required.",
         };
         setFormError(newState);
 
         if (newState.firstName || newState.lastName) {
-            console.log("NEW STATE ERORR", newState);
             return false;
         }
         return true;
     };
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
         setSuccess(null);
@@ -52,15 +50,13 @@ export default function AuthorModal(props) {
         //posts to /author.
         axios
             .post("/author", author)
-            .then(res => {
-                console.log("SUBMITTED", res);
+            .then((res) => {
                 setTimeout(() => {
                     setLoading(false);
                     setSuccess(true);
                 }, config.loading);
             })
-            .catch(e => {
-                console.log("ERROR", e);
+            .catch((e) => {
                 setTimeout(() => {
                     setLoading(false);
                     setError(true);
@@ -72,12 +68,13 @@ export default function AuthorModal(props) {
         if (id) {
             axios
                 .get("/author/", { params: { id } }) //get from /author/:id
-                .then(res => {
-                    console.log("axios get specific book ", res);
+                .then((res) => {
                     setAuthor(res.data);
+                    setLoading(false);
                 })
-                .catch(e => {
-                    console.log("axios error", e);
+                .catch((e) => {
+                    setLoading(false);
+                    setError(true);
                 });
         }
     }, [id]);
@@ -98,23 +95,23 @@ export default function AuthorModal(props) {
                         {
                             label: "First Name",
                             field: "firstName",
-                            onChange: e => {
+                            onChange: (e) => {
                                 setAuthor({
                                     ...author,
-                                    firstName: e.target.value
+                                    firstName: e.target.value,
                                 });
-                            }
+                            },
                         },
                         {
                             label: "Last Name",
                             field: "lastName",
-                            onChange: e => {
+                            onChange: (e) => {
                                 setAuthor({
                                     ...author,
-                                    lastName: e.target.value
+                                    lastName: e.target.value,
                                 });
-                            }
-                        }
+                            },
+                        },
                     ].map(({ label, field, onChange }, idx) => (
                         <Form.Group as={Row} key={idx}>
                             <Form.Label column sm="3">

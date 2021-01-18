@@ -6,10 +6,10 @@ import image from "../images/BookCover1.jpg";
 
 /**
  *  Book card detail with flippable content.
- * @param name: name of the book to be displayed. 
+ * @param name: name of the book to be displayed.
  * @param isbn: isbn of the book to be displayed.
  * @param _id : id of the book to be fetched from backend.
- * @return A flippable Card component that shows the book's details when flipped. 
+ * @return A flippable Card component that shows the book's details when flipped.
  */
 export default function BookFlipCard({ name, isbn, _id: id }) {
     const [book, setBook] = useState({});
@@ -21,12 +21,11 @@ export default function BookFlipCard({ name, isbn, _id: id }) {
         if (id) {
             axios
                 .get("/book", { params: { id } })
-                .then(res => { 
+                .then((res) => {
                     setLoading(false);
                     setBook(res.data);
                 })
-                .catch(e => {
-                    console.log("axios error", e);
+                .catch((e) => {
                     setLoading(false);
                     setError(true);
                 });
@@ -62,7 +61,8 @@ export default function BookFlipCard({ name, isbn, _id: id }) {
 
                     <p
                         className="no-overflow"
-                        style={{ marginTop: "5%", textAlign: "left" }}>
+                        style={{ marginTop: "5%", textAlign: "left" }}
+                    >
                         {" "}
                         {"Name: " + name} <br /> {"ISBN: " + isbn} <br />{" "}
                         {"Author: " +
