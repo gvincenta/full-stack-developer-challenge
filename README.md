@@ -125,11 +125,11 @@ For simplicity, form is validated only after hitting 'Add' button.
 # Github Branches
 To avoid confusions with other candidates' responses, each branch I have worked on is prefixed with 'gilbert-'. 
 # Possible Improvements / Extensions
-- use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/)
+- Use of [redux](https://redux.js.org/) / [xstate](https://xstate.js.org/)
     - Necessary when the scale of the app grows significantly bigger. 
     - This will avoid the need to pass down loading/success/error states too.
     - we can see repeating patterns of handling loading and error states in `/Templates` and `useEffect()`, which could possibly be refactored with this.  
-- when dealing with large amount of data,
+- When dealing with large amount of data,
     - virtualisations would be required 
     - a table view might be more preferable. 
     - [react-table](https://github.com/tannerlinsley/react-table) and [react-virtualized](https://github.com/bvaughn/react-virtualized) are good packages to handle this. 
